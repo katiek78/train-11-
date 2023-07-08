@@ -61,19 +61,24 @@
 
 }
 
-div.card-wrapper:nth-of-type(4n+1) .card {
+div.card-wrapper:nth-of-type(5n+1) .card {
   background-color: red;
 } 
 
-div.card-wrapper:nth-of-type(4n+2) .card {
+div.card-wrapper:nth-of-type(5n+2) .card {
   background-color: orange;
 } 
 
-div.card-wrapper:nth-of-type(4n+3) .card {
+div.card-wrapper:nth-of-type(5n+3) .card {
   background-color: rgb(221, 221, 37)
 } 
-div.card-wrapper:nth-of-type(4n+4) .card {
+
+div.card-wrapper:nth-of-type(5n+4) .card {
   background-color: green;
+} 
+
+div.card-wrapper:nth-of-type(5n+5) .card {
+  background-color: blue;
 } 
 
 .card:hover {
