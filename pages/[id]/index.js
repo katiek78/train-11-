@@ -2,54 +2,33 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import dbConnect from '../../lib/dbConnect'
-import Pet from '../../models/Pet'
+import Word from '../../models/Word'
 
 /* Allows you to view pet card info and delete pet card*/
-const PetPage = ({ pet }) => {
+const WordPage = ({ word }) => {
   const router = useRouter()
   const [message, setMessage] = useState('')
   const handleDelete = async () => {
-    const petID = router.query.id
+    const wordID = router.query.id
 
     try {
-      await fetch(`/api/pets/${petID}`, {
+      await fetch(`/api/words/${wordID}`, {
         method: 'Delete',
       })
       router.push('/')
     } catch (error) {
-      setMessage('Failed to delete the pet.')
+      setMessage('Failed to delete the word.')
     }
   }
 
   return (
-    <div key={pet._id}>
+    <div key={word._id}>
       <div className="card">
-        <img src={pet.image_url} />
-        <h5 className="pet-name">{pet.name}</h5>
+        <h5 className="word">{word.word}</h5>
         <div className="main-content">
-          <p className="pet-name">{pet.name}</p>
-          <p className="owner">Owner: {pet.owner_name}</p>
-
-          {/* Extra Pet Info: Likes and Dislikes */}
-          <div className="likes info">
-            <p className="label">Likes</p>
-            <ul>
-              {pet.likes.map((data, index) => (
-                <li key={index}>{data} </li>
-              ))}
-            </ul>
-          </div>
-          <div className="dislikes info">
-            <p className="label">Dislikes</p>
-            <ul>
-              {pet.dislikes.map((data, index) => (
-                <li key={index}>{data} </li>
-              ))}
-            </ul>
-          </div>
-
+        
           <div className="btn-container">
-            <Link href="/[id]/edit" as={`/${pet._id}/edit`} legacyBehavior>
+            <Link href="/[id]/edit" as={`/${word._id}/edit`} legacyBehavior>
               <button className="btn edit">Edit</button>
             </Link>
             <button className="btn delete" onClick={handleDelete}>
@@ -66,10 +45,10 @@ const PetPage = ({ pet }) => {
 export async function getServerSideProps({ params }) {
   await dbConnect()
 
-  const pet = await Pet.findById(params.id).lean()
-  pet._id = pet._id.toString()
+  const word = await Word.findById(params.id).lean()
+  word._id = word._id.toString()
 
-  return { props: { pet } }
+  return { props: { word } }
 }
 
-export default PetPage
+export default WordPage
