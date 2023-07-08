@@ -14,6 +14,7 @@ function MyApp({ Component, pageProps }) {
         <div className="nav">
           <Link href="/">Home</Link>
           <Link href="/new">Add Word</Link>
+          <Link href="/import">Import Words</Link>
         </div>
 
         <img
