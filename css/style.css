@@ -58,8 +58,23 @@
   box-shadow: 0 0 10px 5px var(--shadow);
   position: relative;
   font-size: 100%;
-  background-color: orange;
+
 }
+
+div.card-wrapper:nth-of-type(4n+1) .card {
+  background-color: red;
+} 
+
+div.card-wrapper:nth-of-type(4n+2) .card {
+  background-color: orange;
+} 
+
+div.card-wrapper:nth-of-type(4n+3) .card {
+  background-color: rgb(221, 221, 37)
+} 
+div.card-wrapper:nth-of-type(4n+4) .card {
+  background-color: green;
+} 
 
 .card:hover {
   --shadow: rgba(53, 53, 53, 0.103);

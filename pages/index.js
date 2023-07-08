@@ -12,7 +12,7 @@ const Index = ({ words }) => (
         return -1 
       } else return 0;
     }).map((word) => (
-      <div key={word._id}>
+      <div className="card-wrapper" key={word._id}>
         <div className="card">
        
           <h5 className="word">{word.word}</h5>
