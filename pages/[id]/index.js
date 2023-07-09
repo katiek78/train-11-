@@ -22,7 +22,7 @@ const WordPage = ({ word }) => {
   }
 
   return (
-    <div key={word._id}>
+    <div className="card-wrapper" key={word._id}>
       <div className="card">
         <h5 className="word">{word.word}</h5>
         <div className="main-content">

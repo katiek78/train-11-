@@ -10,10 +10,10 @@ const WordSchema = new mongoose.Schema({
     maxlength: [60, 'Word cannot be more than 60 characters'],
   },
   meaning: {
-    /* The meanining of this word */
+    /* The meaning of this word */
 
     type: String,
-    required: [true, "Please provide the meaning"],
+    required: [false],
     maxlength: [100, "Meaning cannot be more than 100 characters"],
   },
  

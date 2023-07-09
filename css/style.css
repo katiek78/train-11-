@@ -115,11 +115,6 @@ div.card-wrapper:nth-of-type(5n+5) .card {
   transition: 0.5s all;
 }
 
-.owner {
-  color: grey;
-  font-size: 110%;
-}
-
 .word {
   font-weight: bold;
   font-size: 130%;

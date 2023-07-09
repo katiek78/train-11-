@@ -2,49 +2,20 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { mutate } from 'swr'
 
-const Form = ({ formId, wordForm, forNewWord = true }) => {
+const ImportForm = ({ formId, importForm }) => {
   const router = useRouter()
   const contentType = 'application/json'
   const [errors, setErrors] = useState({})
   const [message, setMessage] = useState('')
 
   const [form, setForm] = useState({
-    word: wordForm.word,
-    meaning: wordForm.meaning,
+    text: importForm.text
   })
-
-  /* The PUT method edits an existing entry in the mongodb database. */
-  const putData = async (form) => {
-    const { id } = router.query
-
-    try {
-      const res = await fetch(`/api/words/${id}`, {
-        method: 'PUT',
-        headers: {
-          Accept: contentType,
-          'Content-Type': contentType,
-        },
-        body: JSON.stringify(form),
-      })
-
-      // Throw error with status code in case Fetch API req failed
-      if (!res.ok) {
-        throw new Error(res.status)
-      }
-
-      const { data } = await res.json()
-
-      mutate(`/api/words/${id}`, data, false) // Update the local data without a revalidation
-      router.push('/')
-    } catch (error) {
-      setMessage('Failed to update word')
-    }
-  }
 
   /* The POST method adds a new entry in the mongodb database. */
   const postData = async (form) => {
     try {
-      const res = await fetch('/api/words', {
+      const res = await fetch('/api/wordsMultiple', {
         method: 'POST',
         headers: {
           Accept: contentType,
@@ -60,7 +31,7 @@ const Form = ({ formId, wordForm, forNewWord = true }) => {
 
       router.push('/')
     } catch (error) {
-      setMessage('Failed to add word')
+      setMessage('Failed to add words')
     }
   }
 
@@ -78,8 +49,7 @@ const Form = ({ formId, wordForm, forNewWord = true }) => {
   /* Makes sure word info is filled */
   const formValidate = () => {
     let err = {}
-    if (!form.word) err.word = 'Word is required'
-    if (!form.meaning) err.meaning = 'Meaning is required'
+    if (!form.text) err.text = 'Words are required'
 
     return err
   }
@@ -88,7 +58,7 @@ const Form = ({ formId, wordForm, forNewWord = true }) => {
     e.preventDefault()
     const errs = formValidate()
     if (Object.keys(errs).length === 0) {
-      forNewWord ? postData(form) : putData(form)
+      postData(form)
     } else {
       setErrors({ errs })
     }
@@ -97,22 +67,12 @@ const Form = ({ formId, wordForm, forNewWord = true }) => {
   return (
     <>
       <form id={formId} onSubmit={handleSubmit}>
-        <label htmlFor="word">Word</label>
-        <input
-          type="text"
-          maxLength="60"
-          name="word"
-          value={form.word}
-          onChange={handleChange}
-          required
-        />
 
-        <label htmlFor="meaning">Meaning</label>
-        <input
-          type="text"
-          maxLength="100"
-          name="meaning"
-          value={form.meaning}
+        <label htmlFor="text">Words to import</label>
+        <textarea name="text"      
+          rows="30"
+          cols="60"
+          value={form.text}
           onChange={handleChange}
           required
         />
@@ -131,4 +91,4 @@ const Form = ({ formId, wordForm, forNewWord = true }) => {
   )
 }
 
-export default Form
+export default ImportForm
