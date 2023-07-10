@@ -26,6 +26,7 @@ function MyApp({ Component, pageProps }) {
           <Link href="/">Home</Link>
           <Link href="/new">Add Word</Link>
           <Link href="/import">Import Words</Link>
+          <Link href="/edit-all">Edit All</Link>
         </div>
 
         <img
