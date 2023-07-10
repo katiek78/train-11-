@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps }) {
       </Head>
 
       <div className="top-bar">
-        <div className="nav">
+        <div className="navbar">
           <Link href="/">Home</Link>
           <Link href="/new">Add Word</Link>
           <Link href="/import">Import Words</Link>
