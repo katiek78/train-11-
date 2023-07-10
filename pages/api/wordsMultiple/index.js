@@ -19,16 +19,21 @@ export default async function handler(req, res) {
     case 'POST':
       try {
         const words = req.body.text.split("\n");
-        let wordData = []
-        words.forEach(async function(element, index, array) {
-            wordData = {
-                word: element
-            }
-            console.log(wordData);
-            const word = await Word.create(
-          wordData
-            );
-        });
+        //this kind of works but usually does a 405
+        // let wordData = []
+        // words.forEach(async function(element, index, array) {
+        //     wordData = {
+        //         word: element
+        //     }
+        //     console.log(wordData);
+        //     const word = await Word.create(
+        //   wordData
+        //     );
+        // });
+        let wordData = words.map(word => ({word: word}));
+        console.log(wordData);
+        await Word.insertMany(wordData);
+
         // ) /* create a new model in the database */
         // const wordData = words.map(element => { word: element});
         // insert all the wordData
