@@ -134,6 +134,21 @@
 
 }
 
+.card-view {
+  background-color: orange;
+  display: inline-block;
+  width: 200px;
+  height: 300px;
+  overflow: hidden;
+  border: 1.25px solid rgb(233, 233, 233);
+  border-radius: 16px;
+  margin: 10px;
+  --shadow: transparent;
+  box-shadow: 0 0 10px 5px var(--shadow);
+  position: relative;
+  font-size: 100%;
+}
+
 div.card-wrapper:nth-of-type(5n+1) .card {
   background-color: red;
 } 
@@ -169,13 +184,11 @@ div.card-wrapper:nth-of-type(5n+5) .card {
   margin: 0;
 }
 
-.card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.card-view * {
+  margin: 0;
 }
 
-.main-content {
+ .main-content {
   padding: 25px;
   position: absolute;
   top: 0;
@@ -186,9 +199,21 @@ div.card-wrapper:nth-of-type(5n+5) .card {
   opacity: 0;
   pointer-events: none;
   transition: 0.5s all;
-}
+} 
+
+.main-content-view {
+  position: absolute;
+  top: 100px;
+  left: 10px;
+  padding: 10px;
+} 
 
 .word {
+  font-weight: bold;
+  font-size: 130%;
+}
+
+.word-view {
   font-weight: bold;
   font-size: 130%;
 }
@@ -199,6 +224,15 @@ h5.word {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  padding: 10px;
+  text-shadow: 0px 0px 4px black;
+}
+
+h5.word-view {
+  color: white;
+  position: absolute;
+  top: 30px;
+  left: 10px;
   padding: 10px;
   text-shadow: 0px 0px 4px black;
 }
@@ -236,6 +270,14 @@ li {
   right: 10px;
 }
 
+.btn-container-view {
+  text-align: right;
+  padding: 10px;
+  position: absolute;
+  left: 10px;
+  bottom: 10px; 
+}
+
 .btn {
   --accent: grey;
   cursor: pointer;
@@ -267,11 +309,6 @@ li {
 .view.btn {
   --accent: blue;
   margin-left: 10px;
-}
-
-/* Delete Pet */
-.pet-container {
-  width: 100%;
 }
 
 .confirmation-box.show {

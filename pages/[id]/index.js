@@ -22,11 +22,12 @@ const WordPage = ({ word }) => {
   }
 
   return (
-    <div className="card-wrapper" key={word._id}>
-      <div className="card">
-        <h5 className="word">{word.word}</h5>
-        <div className="main-content">
-        
+    <>
+    {/* <div className="card-wrapper">
+      <div className="card-view">
+        <h5 className="word-view">{word.word}</h5>
+         <div className="main-content-view">
+          <p>{word.meaning}</p>
           <div className="btn-container">
             <Link href="/[id]/edit" as={`/${word._id}/edit`} legacyBehavior>
               <button className="btn edit">Edit</button>
@@ -35,10 +36,28 @@ const WordPage = ({ word }) => {
               Delete
             </button>
           </div>
-        </div>
+        </div> 
       </div>
       {message && <p>{message}</p>}
-    </div>
+    </div> */}
+    <div className="card-wrapper">
+    <div className="card-view"  key={word._id}>
+       
+       <h5 className="word-view">{word.word}</h5>
+       <div className="main-content-view">
+        <p>{word.meaning}</p>
+       
+       </div>
+       <div className="btn-container-view">
+           <Link href="/[id]/edit" as={`/${word._id}/edit`} legacyBehavior>
+             <button className="btn edit">Edit</button>
+           </Link>
+      
+             <button className="btn delete" onCick={handleDelete}>Delete</button>
+         </div>
+     </div>
+      </div>
+      </>
   )
 }
 
