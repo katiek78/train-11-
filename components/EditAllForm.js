@@ -1,19 +1,68 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 
-const EditAllForm = ({ formId, editAllForm, words }) => {
+const EditAllForm = ({ formId, editAllForm }) => {
     const router = useRouter()
     const contentType = 'application/json'
-    const [errors, setErrors] = useState({})
+    // const [errors, setErrors] = useState({})
     const [message, setMessage] = useState('')
 
     const [form, setForm] = useState({
-        wordRows: editAllForm.wordRows
+        words: editAllForm.words        
       })
   
-      return (
+    const handleChange = (e) => {
+        const target = e.target     
+
+        const value = target.value
+        const name = target.name
+        const isWord = name.includes("Word");
+        const updatedForm = { ...form };
+        const thisId = isWord ? name.slice(7) : name.slice(10);
+        const wordIndex = updatedForm.words.findIndex((word) => word._id === thisId);
+        if (wordIndex !== -1) {
+            if (isWord) {
+              // Update the word property with the new value
+              updatedForm.words[wordIndex].word = value;
+            } else {
+              // Update the meaning property with the new value
+              updatedForm.words[wordIndex].meaning = value;
+            }
+          }
+          console.log(updatedForm);
+        setForm(updatedForm);
+    }
+
+    const putData = async (form) => {
+      try {
+        const res = await fetch('/api/wordsMultiple', {
+          method: 'PUT',
+          headers: {
+            Accept: contentType,
+            'Content-Type': contentType,
+          },
+          body: JSON.stringify(form),
+        })
+  
+        // Throw error with status code in case Fetch API req failed
+        if (!res.ok) {
+          throw new Error(res.status)
+        }
+  
+        router.push('/')
+      } catch (error) {
+        setMessage('Failed to add words')
+      }
+    }
+
+    const handleSubmit = (e) => {
+      e.preventDefault()
+      putData(form)
+    }
+   
+    return (
         <>
-          <form id={formId} >
+          <form id={formId} onSubmit={handleSubmit} >
     
           <div>
       <table>
@@ -24,7 +73,7 @@ const EditAllForm = ({ formId, editAllForm, words }) => {
           </tr>          
         </thead>
         <tbody>
-            {words.map(word => <tr><td><input value={word.word} id={'inpWord' + word._id}></input></td><td><input value={word.meaning} id={'inpMeaning' + word._id}></input></td></tr>)}
+            {form.words.map(word => <tr key={word._id}><td><input onChange={handleChange} value={word.word} id={'inpWord' + word._id} name={'inpWord' + word._id}></input></td><td><input onChange={handleChange} value={word.meaning} id={'inpMeaning' + word._id} name={'inpMeaning' + word._id}></input></td></tr>)}
         </tbody>
       </table>
     </div>
@@ -35,9 +84,9 @@ const EditAllForm = ({ formId, editAllForm, words }) => {
           </form>
           <p>{message}</p>
           <div>
-            {Object.keys(errors).map((err, index) => (
+            {/* {Object.keys(errors).map((err, index) => (
               <li key={index}>{err}</li>
-            ))}
+            ))} */}
           </div>
         </>
       )

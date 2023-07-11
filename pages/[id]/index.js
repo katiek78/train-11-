@@ -53,7 +53,7 @@ const WordPage = ({ word }) => {
              <button className="btn edit">Edit</button>
            </Link>
       
-             <button className="btn delete" onCick={handleDelete}>Delete</button>
+             <button className="btn delete" onClick={handleDelete}>Delete</button>
          </div>
      </div>
       </div>

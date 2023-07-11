@@ -4,10 +4,10 @@ import EditAllForm from '../components/EditAllForm'
 
 const EditAll = ({ words }) => {
   const editAllForm = {
-    wordRows: [{word: '', meaning: ''}],
+    words,
   }
 
-  return <EditAllForm formId="edit-all-form" editAllForm={editAllForm} words={words} />
+  return <EditAllForm formId="edit-all-form" editAllForm={editAllForm} />
 }
 
 

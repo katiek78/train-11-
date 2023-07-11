@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps }) {
       <div className="navbar">
         <div className="app-title">Train 11+</div>
         <div className="navbar-toggle" onClick={toggleLinks}>
-          <span class="toggle-icon"></span>
+          <span className="toggle-icon"></span>
         </div>
         <div className={`navbar-links ${showLinks ? "show" : ""}`}>
           <Link href="/">Home</Link>
