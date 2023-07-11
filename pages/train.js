@@ -14,7 +14,7 @@ const Train = ({ words }) => {
 return(
   <>
   <div className="card-wrapper">
-  <p>Click on the card or press space to see meaning.</p>
+  <p>Click on the card to see meaning.</p>
   <RandomWord word={random.word} meaning={random.meaning} />
   </div>
   </>
