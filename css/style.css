@@ -81,6 +81,10 @@
   margin-left: 0;
 }
 
+.main-content-view.hide {
+  display:none;
+}
+
 /* Media query for larger screens */
 @media (min-width: 768px) {
   .navbar {

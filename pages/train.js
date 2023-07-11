@@ -4,7 +4,7 @@ import RandomWord from '../components/RandomWord';
 import { useState, useEffect } from 'react';
 
 const Train = ({ words }) => {
- const [random, setRandom] = useState('');
+ const [random, setRandom] = useState({});
  
     useEffect(() => {
         setRandom(words[Math.floor(Math.random() * words.length)]);   
@@ -13,7 +13,10 @@ const Train = ({ words }) => {
     
 return(
   <>
+  <div className="card-wrapper">
+  <p>Click on the card or press space to see meaning.</p>
   <RandomWord word={random.word} meaning={random.meaning} />
+  </div>
   </>
   )
 }
