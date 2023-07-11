@@ -1,12 +1,19 @@
 import { useState } from "react";
+import Link from "next/link";
 
-const RandomWord = ({word, meaning}) => {
+const RandomWord = ({word, meaning, id, handleNewWord}) => {
   
     const [isShowing, setIsShowing] = useState(false);
 
-    const handleClick = () => {
-        console.log(isShowing)
+    const handleClick = (e) => {                   
         setIsShowing(!isShowing);
+        console.log(isShowing)
+    }
+
+    const handleNext = (e) => {
+        e.stopPropagation();          
+        setIsShowing(false);
+        handleNewWord();
     }
 
 return(
@@ -17,7 +24,14 @@ return(
         <p>{meaning}</p>
        
        </div>
-    </div>
+       <div className="btn-container-view">
+           <Link href="/[id]/edit" as={`/${id}/edit`} legacyBehavior>
+             <button className="btn edit">Edit</button>
+           </Link>
+      
+             <button className="btn next" onClick={handleNext}>Next Word</button>
+         </div>
+  </div>
 
 )
 

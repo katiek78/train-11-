@@ -1,23 +1,28 @@
 import dbConnect from '../lib/dbConnect'
+import Link from 'next/link';
 import Word from '../models/Word'
 import RandomWord from '../components/RandomWord';
 import { useState, useEffect } from 'react';
 
 const Train = ({ words }) => {
  const [random, setRandom] = useState({});
+ const [needNewWord, setNeedNewWord] = useState(false);
  
     useEffect(() => {
         setRandom(words[Math.floor(Math.random() * words.length)]);   
+        setNeedNewWord(false);
         return () => {};
-    }, []);
+    }, [needNewWord]);
+
+    const handleNext = () => {
+        setNeedNewWord(true);
+    }
     
 return(
-  <>
   <div className="card-wrapper">
   <p>Click on the card to see meaning.</p>
-  <RandomWord word={random.word} meaning={random.meaning} />
+  <RandomWord word={random.word} meaning={random.meaning} id={random._id} handleNewWord={handleNext} />
   </div>
-  </>
   )
 }
 
