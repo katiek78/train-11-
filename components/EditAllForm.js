@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 
-const EditAllForm = ({ formId, editAllForm }) => {
+const EditAllForm = ({ formId, editAllForm, words }) => {
     const router = useRouter()
     const contentType = 'application/json'
     const [errors, setErrors] = useState({})
@@ -13,9 +13,21 @@ const EditAllForm = ({ formId, editAllForm }) => {
   
       return (
         <>
-          <form id={formId}>
+          <form id={formId} >
     
-           
+          <div>
+      <table>
+        <thead>
+          <tr>
+            <th>Word</th>
+            <th>Meaning</th>
+          </tr>          
+        </thead>
+        <tbody>
+            {words.map(word => <tr><td><input value={word.word} id={'inpWord' + word._id}></input></td><td><input value={word.meaning} id={'inpMeaning' + word._id}></input></td></tr>)}
+        </tbody>
+      </table>
+    </div>
     
             <button type="submit" className="btn">
               Submit
