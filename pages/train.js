@@ -20,9 +20,11 @@ const Train = ({ words }) => {
     }
     
 return(
+    <div className="grid wrapper">
   <div className="card-wrapper">
   <p>Click on the card to see meaning.</p>
   <RandomWord word={random.word} meaning={random.meaning} id={random._id} handleNewWord={handleNext} />
+  </div>
   </div>
   )
 }

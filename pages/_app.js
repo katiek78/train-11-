@@ -38,7 +38,7 @@ function MyApp({ Component, pageProps }) {
         
       </div>
      
-      <div className="grid wrapper">
+      <div className="">
         <Component {...pageProps} />
       </div>
     </>

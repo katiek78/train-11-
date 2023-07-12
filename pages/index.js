@@ -3,14 +3,33 @@ import dbConnect from '../lib/dbConnect'
 import Word from '../models/Word'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from '@fortawesome/free-solid-svg-icons'
+import { useState, useEffect } from 'react'
 
 const Index = ({ words }) => {
- 
+
+  const handleClick = (e) => {
+    setLetter(e.target.innerText.trim());
+  }
+
+  const [letter, setLetter] = useState('A');
+  const [filterData, setFilterData] = useState([]);
+
+  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  
+  useEffect(() => {
+    setFilterData(words.filter(word => word.word[0] === letter.toLowerCase()));
+  }, [letter]);
+
   return(
   <>
-    
+    <div className="alphabet">
+    {alphabet.split('').map((l) => (
+      <span onClick={handleClick}>  {l}  </span>
+    ))}
+      </div>
+    <div className="wrapper grid">
     {/* Create a card for each word */}
-    {words.sort((a, b) => {
+    {filterData.sort((a, b) => {
       if (a.word > b.word) {
         return 1
       } else if (b.word > a.word) {
@@ -40,8 +59,10 @@ const Index = ({ words }) => {
         </div>
        
         </div>  
+     
  </>
     ))}
+    </div>
   </>
 )}
 
