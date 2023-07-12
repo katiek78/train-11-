@@ -4,27 +4,6 @@ import Word from '../models/Word'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from '@fortawesome/free-solid-svg-icons'
 
-{/* <div className="card-wrapper">
-        <div className="card"  key={word._id}>
-       
-          <h5 className="word">{word.word}</h5>
-          <div className="main-content">
-           
-        
-
-            <div className="btn-container">
-              <Link href="/[id]/edit" as={`/${word._id}/edit`} legacyBehavior>
-                <button className="btn edit">Edit</button>
-              </Link>
-              <Link href="/[id]" as={`/${word._id}`} legacyBehavior>
-                <button className="btn view">View</button>
-              </Link>
-            </div>
-          </div>
-        </div>
-        
-      </div> */}
-
 const Index = ({ words }) => {
  
   return(

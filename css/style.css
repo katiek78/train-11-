@@ -326,7 +326,7 @@ li {
 .btn {
   --accent: grey;
   cursor: pointer;
-  background: transparent;
+  /* background: transparent; */
   /* border: 1.5px solid var(--accent);
   color: var(--accent); */
   border-radius: 10px;

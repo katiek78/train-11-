@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEdit } from '@fortawesome/free-solid-svg-icons'
 
 const RandomWord = ({word, meaning, id, handleNewWord}) => {
   
@@ -25,9 +27,10 @@ return(
        
        </div>
        <div className="btn-container-view">
-           <Link href="/[id]/edit" as={`/${id}/edit`} legacyBehavior>
+           {/* <Link href="/[id]/edit" as={`/${id}/edit`} legacyBehavior>
              <button className="btn edit">Edit</button>
-           </Link>
+           </Link> */}
+           <Link href="/[id]/edit" as={`/${id}/edit`} legacyBehavior><FontAwesomeIcon className='btn' icon={faEdit} /></Link>
       
              <button className="btn next" onClick={handleNext}>Next Word</button>
          </div>

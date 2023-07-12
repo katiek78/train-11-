@@ -1,8 +1,9 @@
 import dbConnect from '../lib/dbConnect'
-import Link from 'next/link';
 import Word from '../models/Word'
 import RandomWord from '../components/RandomWord';
 import { useState, useEffect } from 'react';
+
+
 
 const Train = ({ words }) => {
  const [random, setRandom] = useState({});
