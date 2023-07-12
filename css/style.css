@@ -109,9 +109,9 @@
   border: 1.25px solid rgb(233, 233, 233);
   border-radius: 16px;
   margin: 10px;
-  transition: 0.5s all;
+  /* transition: 0.5s all;
   --shadow: transparent;
-  box-shadow: 0 0 10px 5px var(--shadow);
+  box-shadow: 0 0 10px 5px var(--shadow); */
   position: relative;
   font-size: 100%;
 
@@ -126,8 +126,8 @@
   border: 1.25px solid rgb(233, 233, 233);
   border-radius: 16px;
   margin: 10px;
-  --shadow: transparent;
-  box-shadow: 0 0 10px 5px var(--shadow);
+  /* --shadow: transparent;
+  box-shadow: 0 0 10px 5px var(--shadow); */
   position: relative;
   font-size: 100%;
 }
@@ -194,14 +194,14 @@ div.card-wrapper:nth-of-type(5n+5) .card {
   -webkit-translate: -20px;
 }
 
-.card:hover {
+/* .card:hover {
   --shadow: rgba(53, 53, 53, 0.103); 
 }
 
 .card:hover .main-content {
   pointer-events: initial;
   opacity: 1;
-}
+} */
 
 .card * {
   margin: 0;
@@ -220,8 +220,8 @@ div.card-wrapper:nth-of-type(5n+5) .card {
   width: 100%;
   height: 100%;
   opacity: 0;
-  pointer-events: none;
-  transition: 0.5s all;
+  /* pointer-events: none;
+  transition: 0.5s all; */ 
 } 
 
 .main-content-view {
