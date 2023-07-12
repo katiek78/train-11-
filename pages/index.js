@@ -2,17 +2,7 @@ import Link from 'next/link'
 import dbConnect from '../lib/dbConnect'
 import Word from '../models/Word'
 
-const Index = ({ words }) => (
-  <>
-    {/* Create a card for each word */}
-    {words.sort((a, b) => {
-      if (a.word > b.word) {
-        return 1
-      } else if (b.word > a.word) {
-        return -1 
-      } else return 0;
-    }).map((word) => (
-      <div className="card-wrapper">
+{/* <div className="card-wrapper">
         <div className="card"  key={word._id}>
        
           <h5 className="word">{word.word}</h5>
@@ -30,7 +20,54 @@ const Index = ({ words }) => (
             </div>
           </div>
         </div>
-      </div>
+        
+      </div> */}
+
+const Index = ({ words }) => (
+  <>
+    
+    {/* Create a card for each word */}
+    {words.sort((a, b) => {
+      if (a.word > b.word) {
+        return 1
+      } else if (b.word > a.word) {
+        return -1 
+      } else return 0;
+    }).map((word) => (
+      
+      <div className="card-wrapper flip-card">      
+        <div className="flip-card-inner" key={word._id}>
+          <div className="card flip-card-front">
+            <h5 className="word">{word.word}</h5>
+            <div className="main-content">
+           
+              <div className="btn-container">
+                  <Link href="/[id]/edit" as={`/${word._id}/edit`} legacyBehavior>
+                    <button className="btn edit">Edit</button>
+                  </Link>
+                  <Link href="/[id]" as={`/${word._id}`} legacyBehavior>
+                    <button className="btn view">View</button>
+                  </Link>
+               </div>
+            </div>
+          </div>
+          <div className="card flip-card-back">
+            <h5 className="meaning">{word.meaning}</h5>
+            <div className="main-content">
+           
+              <div className="btn-container">
+                    <Link href="/[id]/edit" as={`/${word._id}/edit`} legacyBehavior>
+                      <button className="btn edit">Edit</button>
+                    </Link>
+                    <Link href="/[id]" as={`/${word._id}`} legacyBehavior>
+                      <button className="btn view">View</button>
+                    </Link>
+                </div>
+            </div>
+          </div>
+        </div>
+        </div>  
+
     ))}
   </>
 )
