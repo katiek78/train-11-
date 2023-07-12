@@ -168,7 +168,9 @@ div.card-wrapper:nth-of-type(5n+5) .card {
   transition: transform 1s;
   -webkit-transition: transform 1s;
   transform-style: preserve-3d;
-  transform-origin: 0px 0 0.
+  -webkit-transform-style: preserve-3d;
+  transform-origin: center;
+  -webkit-transform-origin: center;
 }
 
 .flip-card:hover .flip-card-inner {
