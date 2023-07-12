@@ -16,7 +16,11 @@ const WordSchema = new mongoose.Schema({
     required: [false],
     maxlength: [100, "Meaning cannot be more than 100 characters"],
   },
- 
+  wordType: {
+        type: String, 
+        enum: ['adjective', 'adverb', 'noun', 'verb', 'multiple', 'other']
+    }
+
 })
 
 export default mongoose.models.Word || mongoose.model('Word', WordSchema)

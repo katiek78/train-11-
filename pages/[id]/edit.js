@@ -23,6 +23,7 @@ const EditWord = () => {
   const wordForm = {
     word: word.word,
     meaning: word.meaning,
+    wordType: word.wordType
   }
 
   return <Form formId="edit-word-form" wordForm={wordForm} forNewWord={false} />

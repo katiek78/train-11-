@@ -42,11 +42,11 @@ const Index = ({ words }) => {
      
         <div className="flip-card-inner" key={word._id}>
         
-          <div className="card flip-card-front">
-            <h5 className="word">{word.word}</h5>
+          <div className={"card flip-card-front" + " " + (word.wordType || "")}>
+            <h5 className="word">{word.word}</h5>            
            
           </div>
-          <div className="card flip-card-back" >
+          <div className={"card flip-card-back" + " " + (word.wordType || "")}>
             <h5 className="meaning">{word.meaning}</h5>
           
           

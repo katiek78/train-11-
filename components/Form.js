@@ -11,6 +11,7 @@ const Form = ({ formId, wordForm, forNewWord = true }) => {
   const [form, setForm] = useState({
     word: wordForm.word,
     meaning: wordForm.meaning,
+    wordType: wordForm.wordType
   })
 
   /* The PUT method edits an existing entry in the mongodb database. */
@@ -79,8 +80,7 @@ const Form = ({ formId, wordForm, forNewWord = true }) => {
   const formValidate = () => {
     let err = {}
     if (!form.word) err.word = 'Word is required'
-    if (!form.meaning) err.meaning = 'Meaning is required'
-
+   
     return err
   }
 
@@ -116,6 +116,21 @@ const Form = ({ formId, wordForm, forNewWord = true }) => {
           onChange={handleChange}
           required
         />
+
+        <label htmlFor="wordType">Word type</label>
+        <select         
+          name="wordType"
+          value={form.wordType}
+          onChange={handleChange}
+          required
+                >
+        <option value="adjective">adjective</option>
+        <option value="adverb">adverb</option>        
+        <option value="noun">noun</option>
+        <option value="verb">verb</option>
+        <option value="multiple">multiple</option>
+        <option value="other">other</option>
+        </select>
 
         <button type="submit" className="btn">
           Submit

@@ -141,7 +141,7 @@
   perspective: 500px;
 }
 
-div.card-wrapper:nth-of-type(5n+1) .card {
+/* div.card-wrapper:nth-of-type(5n+1) .card {
   background-color: red;
 } 
 
@@ -159,7 +159,7 @@ div.card-wrapper:nth-of-type(5n+4) .card {
 
 div.card-wrapper:nth-of-type(5n+5) .card {
   background-color: rgb(112, 112, 224);
-} 
+}  */
 
 .flip-card-inner {
   position: absolute;
@@ -286,6 +286,22 @@ h5.word-view {
   padding: 5px;
 }
 
+
+.noun {
+  background-color: rgb(75, 211, 75);
+}
+
+.verb {
+  background-color: rgb(235, 235, 100);
+}
+
+.adjective {
+  background-color: rgb(112, 112, 224)
+}
+
+.multiple {
+  background: repeating-linear-gradient(-45deg, lightgray, lightgray 5px, white 5px, white 10px);
+}
 
 .info ul {
   padding: 10px;

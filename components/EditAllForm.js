@@ -70,10 +70,13 @@ const EditAllForm = ({ formId, editAllForm }) => {
           <tr>
             <th>Word</th>
             <th>Meaning</th>
+            <th>Word Type</th>
           </tr>          
         </thead>
         <tbody>
-            {form.words.map(word => <tr key={word._id}><td><input onChange={handleChange} value={word.word} id={'inpWord' + word._id} name={'inpWord' + word._id}></input></td><td><input onChange={handleChange} value={word.meaning} id={'inpMeaning' + word._id} name={'inpMeaning' + word._id}></input></td></tr>)}
+            {form.words.map(word => <tr key={word._id}><td><input onChange={handleChange} value={word.word} id={'inpWord' + word._id} name={'inpWord' + word._id}></input></td><td><input onChange={handleChange} value={word.meaning} id={'inpMeaning' + word._id} name={'inpMeaning' + word._id}></input></td>
+            <td><select onChange={handleChange} value={word.wordType} id={'selWordType' + word._id} name={'selWordType' + word._id}></select></td>
+            </tr>)}
         </tbody>
       </table>
     </div>
