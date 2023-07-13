@@ -4,6 +4,7 @@ import Word from '../models/Word'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect } from 'react'
+import { sortAlpha } from '../utilities/sort'
 
 const Index = ({ words }) => {
 
@@ -29,13 +30,7 @@ const Index = ({ words }) => {
       </div>
     <div className="wrapper grid">
     {/* Create a card for each word */}
-    {filterData.sort((a, b) => {
-      if (a.word > b.word) {
-        return 1
-      } else if (b.word > a.word) {
-        return -1 
-      } else return 0;
-    }).map((word) => (
+    {filterData.sort(sortAlpha).map((word) => (
       <>
       
       <div className="card-wrapper flip-card">      

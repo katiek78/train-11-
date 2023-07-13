@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import { sortAlpha } from '../utilities/sort'
 
 const EditAllForm = ({ formId, editAllForm }) => {
     const router = useRouter()
@@ -16,18 +17,17 @@ const EditAllForm = ({ formId, editAllForm }) => {
 
         const value = target.value
         const name = target.name
-        const isWord = name.includes("Word");
+        const isWord = name.includes("inpWord");
+        const isWordType = name.includes("selWordType");
         const updatedForm = { ...form };
-        const thisId = isWord ? name.slice(7) : name.slice(10);
+        const thisId = isWord ? name.slice(7) : (isWordType ? name.slice(11) : name.slice(10));
         const wordIndex = updatedForm.words.findIndex((word) => word._id === thisId);
         if (wordIndex !== -1) {
-            if (isWord) {
-              // Update the word property with the new value
+            if (isWord) {          
               updatedForm.words[wordIndex].word = value;
-            } else {
-              // Update the meaning property with the new value
-              updatedForm.words[wordIndex].meaning = value;
-            }
+            } else if (isWordType) {                      
+              updatedForm.words[wordIndex].wordType = value;
+            } else  updatedForm.words[wordIndex].meaning = value;
           }
           console.log(updatedForm);
         setForm(updatedForm);
@@ -74,8 +74,15 @@ const EditAllForm = ({ formId, editAllForm }) => {
           </tr>          
         </thead>
         <tbody>
-            {form.words.map(word => <tr key={word._id}><td><input onChange={handleChange} value={word.word} id={'inpWord' + word._id} name={'inpWord' + word._id}></input></td><td><input onChange={handleChange} value={word.meaning} id={'inpMeaning' + word._id} name={'inpMeaning' + word._id}></input></td>
-            <td><select onChange={handleChange} value={word.wordType} id={'selWordType' + word._id} name={'selWordType' + word._id}></select></td>
+            {form.words.sort(sortAlpha).map(word => <tr key={word._id}><td><input onChange={handleChange} value={word.word} id={'inpWord' + word._id} name={'inpWord' + word._id}></input></td><td><input onChange={handleChange} value={word.meaning} id={'inpMeaning' + word._id} name={'inpMeaning' + word._id}></input></td>
+            <td><select onChange={handleChange} value={word.wordType} id={'selWordType' + word._id} name={'selWordType' + word._id}>
+            <option value="adjective" selected>adjective</option>
+            <option value="adverb">adverb</option>        
+            <option value="noun">noun</option>
+            <option value="verb">verb</option>
+            <option value="multiple">multiple</option>
+            <option value="other">other</option>
+              </select></td>
             </tr>)}
         </tbody>
       </table>

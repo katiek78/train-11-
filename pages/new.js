@@ -4,7 +4,7 @@ const NewWord = () => {
   const wordForm = {
     word: '',
     meaning: '',
-    wordType: ''
+    wordType: 'adjective'
   }
 
   return <Form formId="add-word-form" wordForm={wordForm} />

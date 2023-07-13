@@ -86,12 +86,23 @@ const Form = ({ formId, wordForm, forNewWord = true }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    
     const errs = formValidate()
     if (Object.keys(errs).length === 0) {
       forNewWord ? postData(form) : putData(form)
     } else {
       setErrors({ errs })
     }
+  }
+
+  //not sure why I need to do this, since <select value={form.wordType || 'adjective'}...
+  if (typeof form.wordType === 'undefined') {
+    console.log("here")
+    setForm({
+      ...form,
+      wordType: 'adjective',
+    })
+    console.log(`form.wordType = ${form.wordType}`)
   }
 
   return (
@@ -120,7 +131,7 @@ const Form = ({ formId, wordForm, forNewWord = true }) => {
         <label htmlFor="wordType">Word type</label>
         <select         
           name="wordType"
-          value={form.wordType}
+          value={form.wordType || 'adjective'}
           onChange={handleChange}
           required
                 >
