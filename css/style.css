@@ -126,18 +126,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Box shadow in conjunction with new .card:before CSS */
 
 }
-.card:before {
-  content: "";
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  right: 10px;
-  bottom: 10px;
-  background-color: #f1f1f1;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  z-index: -1;
-  border-radius: 8px;
-}
+
 
 .card-view {
   background-color: orangered;
@@ -481,5 +470,18 @@ li {
     left: 10px;
     padding: 10px;
     text-shadow: 0px 0px 4px black;
+  }
+
+  .card:before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background-color: #f1f1f1;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    z-index: -1;
+    border-radius: 8px;
   }
 }
