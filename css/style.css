@@ -129,7 +129,7 @@
 
 
 .card-view {
-  background-color: orangered;
+  background-color: #faf4e8;
   display: inline-block;
   width: 200px;
   height: 300px;
@@ -141,6 +141,9 @@
   box-shadow: 0 0 10px 5px var(--shadow); */
   position: relative;
   font-size: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Box shadow in conjunction with new .card:before CSS */
+  border: 2px solid black;
+
 }
 
 .flip-card {
@@ -429,6 +432,36 @@ li {
 
 .confirmation-box.show {
   display: block;
+}
+
+.correction {
+  font-size:150%;
+}
+
+.correct {
+  color:white;
+  background-color: var(--green);
+  padding: 10px 20px;
+  border-radius: 5px; 
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.correct:hover {
+  background-color: #45a049;
+}
+
+.incorrect {
+  color:white;
+  background-color: var(--red);
+  padding: 10px 20px;
+  border-radius: 5px; 
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.incorrect:hover {
+  background-color: #a50505;
 }
 
 /* Media query for larger screens */
