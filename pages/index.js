@@ -13,8 +13,10 @@ const Index = ({ words }) => {
   }
 
   const handleDelete = async (id) => {
-    console.log(`deleting ${id}`)
-    setFilterData(words.filter(word => word._id !== id));
+    //remove it from our word set so it disappears from the view 
+    setFilterData(filterData.filter(word => word._id !== id));
+
+    //remove it from the database
     try {
       await fetch(`/api/words/${id}`, {
         method: 'Delete',
