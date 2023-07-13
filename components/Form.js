@@ -36,7 +36,7 @@ const Form = ({ formId, wordForm, forNewWord = true }) => {
       const { data } = await res.json()
 
       mutate(`/api/words/${id}`, data, false) // Update the local data without a revalidation
-      router.push('/')
+      router.push({pathname: '/', query: {letter: form.word[0]}})
     } catch (error) {
       setMessage('Failed to update word')
     }

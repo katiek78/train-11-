@@ -5,9 +5,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect } from 'react'
 import { sortAlpha } from '../utilities/sort'
+import { useRouter } from 'next/router'
 
 const Index = ({ words }) => {
+  const router = useRouter()
   const [message, setMessage] = useState('')
+  
   const handleClick = (e) => {
     setLetter(e.target.innerText.trim());
   }
@@ -27,7 +30,7 @@ const Index = ({ words }) => {
     }
   }
 
-  const [letter, setLetter] = useState('A');
+  const [letter, setLetter] = useState(router.query.letter || 'A');
   const [filterData, setFilterData] = useState([]);
 
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
