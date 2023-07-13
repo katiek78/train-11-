@@ -2,14 +2,27 @@ import Link from 'next/link'
 import dbConnect from '../lib/dbConnect'
 import Word from '../models/Word'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEdit } from '@fortawesome/free-solid-svg-icons'
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect } from 'react'
 import { sortAlpha } from '../utilities/sort'
 
 const Index = ({ words }) => {
-
+  const [message, setMessage] = useState('')
   const handleClick = (e) => {
     setLetter(e.target.innerText.trim());
+  }
+
+  const handleDelete = async (id) => {
+    console.log(`deleting ${id}`)
+    setFilterData(words.filter(word => word._id !== id));
+    try {
+      await fetch(`/api/words/${id}`, {
+        method: 'Delete',
+      })
+      router.push('/')
+    } catch (error) {
+      setMessage('Failed to delete the word.')
+    }
   }
 
   const [letter, setLetter] = useState('A');
@@ -19,7 +32,7 @@ const Index = ({ words }) => {
   
   useEffect(() => {
     setFilterData(words.filter(word => word.word[0] === letter.toLowerCase()));
-  }, [letter]);
+  }, [letter, words]);
 
   return(
   <>
@@ -47,8 +60,9 @@ const Index = ({ words }) => {
           
             <div className='buttons'>
             <Link href="/[id]/edit" as={`/${word._id}/edit`} legacyBehavior><FontAwesomeIcon className='btn' icon={faEdit} /></Link>
+          
+            <FontAwesomeIcon className='btn' icon={faTrash} onClick={() => handleDelete(word._id)} />
             </div>
-             
            
           </div>
         </div>
