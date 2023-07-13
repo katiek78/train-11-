@@ -12,7 +12,14 @@ const Index = ({ words }) => {
   const [message, setMessage] = useState('')
   
   const handleClick = (e) => {
+    setWordType(''); //for now, if we choose a letter, we are showing all word types
     setLetter(e.target.innerText.trim());
+  }
+
+  const handleClickWordType = (e) => {
+    const selectedType = e.target.id || e.target.parentNode.id; //this ensures if you click the h5 rather than the parent div it still uses the div's id
+    setWordType(selectedType);
+   // setFilterData(filterData.filter(word => word.wordType === selectedType));
   }
 
   const handleDelete = async (id) => {
@@ -31,13 +38,14 @@ const Index = ({ words }) => {
   }
 
   const [letter, setLetter] = useState(router.query.letter || 'A');
+  const [wordType, setWordType] = useState('');
   const [filterData, setFilterData] = useState([]);
 
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   
   useEffect(() => {
-    setFilterData(words.filter(word => word.word[0] === letter.toLowerCase()));
-  }, [letter, words]);
+    setFilterData(words.filter(word => (wordType === '' && word.word[0] === letter.toLowerCase()) || word.wordType === wordType)); //for now, either filtering on a word type or a letter
+  }, [letter, words, wordType]);
 
   return(
   <>
@@ -46,6 +54,16 @@ const Index = ({ words }) => {
       <span onClick={handleClick}>  {l}  </span>
     ))}
       </div>
+
+      <div className="typeCards">
+        <div className="miniCard noun" id="noun" onClick={handleClickWordType}><h5 className="mini">nouns</h5></div>
+        <div className="miniCard verb" id="verb" onClick={handleClickWordType}><h5 className="mini">verbs</h5></div>
+        <div className="miniCard adjective" id="adjective" onClick={handleClickWordType}><h5 className="mini">adjectives</h5></div>
+        <div className="miniCard adverb" id="adverb" onClick={handleClickWordType}><h5 className="mini">adverbs</h5></div>
+        <div className="miniCard other" id="other" onClick={handleClickWordType}><h5 className="mini">other</h5></div>
+        <div className="miniCard multiple" id="multiple" onClick={handleClickWordType}><h5 className="mini">multi</h5></div>        
+      </div>
+
     <div className="wrapper grid">
     {/* Create a card for each word */}
     {filterData.sort(sortAlpha).map((word) => (

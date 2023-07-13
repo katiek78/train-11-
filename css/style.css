@@ -3,6 +3,14 @@
   box-sizing: border-box;
 }
 
+:root {
+  --red: red;
+  --orange: orange;
+  --yellow:rgb(235, 235, 100);
+  --green: rgb(75, 211, 75);
+  --blue: rgb(112, 112, 224)
+}
+
 /* Nav Area */
 .top-bar {
   width: 100%;
@@ -114,7 +122,21 @@
   box-shadow: 0 0 10px 5px var(--shadow); */
   position: relative;
   font-size: 100%;
+  /* box-shadow 2px 2px 2px 2px grey; // SIMPLE BOX SHADOW */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Box shadow in conjunction with new .card:before CSS */
 
+}
+.card:before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  background-color: #f1f1f1;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  z-index: -1;
+  border-radius: 8px;
 }
 
 .card-view {
@@ -258,11 +280,20 @@ h5.word {
 h5.meaning {
   color: black;
   position: absolute;
-  top: 50%;
+  top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 10px; 
   width:90%;
+}
+
+h5.mini {
+  color: black;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -165%);
+ 
 }
 
 h5.word-view {
@@ -287,17 +318,33 @@ h5.word-view {
   padding: 5px;
 }
 
+.typeCards {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.miniCard {
+  display: inline-block;
+  width: 80px;
+  height: 40px;
+  overflow: hidden;
+  border: 1.25px solid rgb(233, 233, 233);
+  border-radius: 16px;
+  margin: 4px;  
+  position: relative;
+  font-size: 80%;
+}
 
 .noun {
-  background-color: rgb(75, 211, 75);
+  background-color: var(--green);
 }
 
 .verb {
-  background-color: rgb(235, 235, 100);
+  background-color: var(--yellow);
 }
 
 .adjective {
-  background-color: rgb(112, 112, 224)
+  background-color: var(--blue);
 }
 
 .multiple {
