@@ -42,7 +42,8 @@ const RandomWord = ({wordObj, handleNewWord, increaseTimesTested, increaseTimesT
 return(
 
     <div className="card-view" onClick={handleClick}>
-    <h5 className="word-view">{word} {timesCorrect}/{timesTested}</h5>
+    <h5 className="word-view">{word}</h5>
+    <h6 className="word-view">{timesCorrect}/{timesTested}</h6>
     <ConfidenceLevel timesCorrect={timesCorrect} timesTested={timesTested} />
 
        <div className={"main-content-view" + (isShowing ? '' : ' hide')}>

@@ -136,7 +136,7 @@
   overflow: hidden;
   border: 1.25px solid rgb(233, 233, 233);
   border-radius: 16px;
-  margin: 10px;
+  margin: 10px 0px;
   /* --shadow: transparent;
   box-shadow: 0 0 10px 5px var(--shadow); */
   position: relative;
@@ -255,8 +255,7 @@ div.card-wrapper:nth-of-type(5n+5) .card {
 }
 
 .word-view {
-  font-weight: bold;
-  font-size: 130%;
+  
 }
 
 h5.word {
@@ -289,12 +288,23 @@ h5.mini {
 }
 
 h5.word-view {
-  color: white;
+  color: black;
   position: absolute;
   top: 30px;
   left: 10px;
   padding: 10px;
-  text-shadow: 0px 0px 2px black;
+  /* text-shadow: 0px 0px 2px black; */
+  font-weight: bold;
+  font-size: 130%;
+}
+
+h6.word-view {
+  color: black;
+  position: absolute;
+  top: 60px;
+  left: 10px;
+  padding: 10px;
+  font-size:60%;
 }
 
 .alphabet {
@@ -356,8 +366,16 @@ h5.word-view {
   background-color: orangered;
 }
 
+.confidence-level.confidence-medium-low {
+  background-color: rgb(223, 142, 21);
+}
+
 .confidence-level.confidence-medium {
   background-color: yellow;
+}
+
+.confidence-level.confidence-medium-high {
+  background-color: rgb(153, 235, 76);
 }
 
 .confidence-level.confidence-high {
@@ -518,13 +536,26 @@ li {
   }
 
   h5.word-view {
-    color: white;
+    color: black;
     position: absolute;
     top: 30px;
     left: 10px;
     padding: 10px;
-    text-shadow: 0px 0px 4px black;
+    font-weight:bold;
+    font-size:130%
+    /* text-shadow: 0px 0px 4px black; */
   }
+
+  
+  h6.word-view {
+    color: black;
+    position: absolute;
+    top: 60px;
+    left: 10px;
+    padding: 10px;
+    font-size:60%;
+  }
+  
 
   .card:before {
     content: "";
