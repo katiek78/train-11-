@@ -105,12 +105,14 @@ const Train = ({ words }) => {
           refreshData();
       }
     }
+
+    
     
 return(
     <div className="grid wrapper">
   <div className="card-wrapper">
   <p>Click on the card to see meaning.</p>
-  <RandomWord word={random.word} meaning={random.meaning} id={random._id} handleNewWord={handleNext} increaseTimesTested={increaseTimesTested} increaseTimesTestedAndCorrect={increaseTimesTestedAndCorrect} />
+  <RandomWord wordObj={random} handleNewWord={handleNext} increaseTimesTested={increaseTimesTested} increaseTimesTestedAndCorrect={increaseTimesTestedAndCorrect} />
   </div>
   <p>{message}</p>
    

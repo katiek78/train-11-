@@ -347,6 +347,27 @@ h5.word-view {
   background-size: 28px 28px;
 }
 
+.confidence-level {
+  height: 10px;
+  background-color: red;
+}
+
+.confidence-level.confidence-low {
+  background-color: orangered;
+}
+
+.confidence-level.confidence-medium {
+  background-color: yellow;
+}
+
+.confidence-level.confidence-high {
+  background-color: lime;
+}
+
+.confidence-level.confidence-untested {
+  background-color: grey;
+}
+
 .info ul {
   padding: 10px;
   padding-top: 0px;
