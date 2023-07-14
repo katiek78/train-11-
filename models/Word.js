@@ -20,13 +20,17 @@ const WordSchema = new mongoose.Schema({
         type: String, 
         enum: ['adjective', 'adverb', 'noun', 'verb', 'multiple', 'other']
     },
-  timesTested: {
-      type: Number,
-      default: 0
-  },
-  timesCorrect: {
-    type: Number,
-    default: 0
+  // timesTested: {
+  //     type: Number,
+  //     default: 0
+  // },
+  // timesCorrect: {
+  //   type: Number,
+  //   default: 0
+  // }
+  recentAttempts: {
+    type: [Number],
+    default: []
   }
 
 })

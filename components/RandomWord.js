@@ -3,11 +3,13 @@ import Link from "next/link";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faCheck,    faXmark } from '@fortawesome/free-solid-svg-icons'
 import ConfidenceLevel from "./ConfidenceLevel";
+import TrafficLights from '../components/TrafficLights';
 
-const RandomWord = ({wordObj, handleNewWord, increaseTimesTested, increaseTimesTestedAndCorrect}) => {
+const RandomWord = ({wordObj, handleNewWord, addToRecentAttempts}) => {
   
     const [isShowing, setIsShowing] = useState(false);
-    const {word, meaning, timesTested, timesCorrect} = wordObj;
+    const {word, meaning, recentAttempts} = wordObj;
+    
     const id = wordObj._id;
     
     const handleClick = (e) => {                   
@@ -24,14 +26,14 @@ const RandomWord = ({wordObj, handleNewWord, increaseTimesTested, increaseTimesT
     const handleCorrect = (e) => {
         e.stopPropagation();          
         setIsShowing(false);
-        increaseTimesTestedAndCorrect(id);        
+        addToRecentAttempts(true, id);        
         handleNewWord();
     }
 
     const handleIncorrect = (e) => {
         e.stopPropagation();          
         setIsShowing(false);
-        increaseTimesTested(id);        
+        addToRecentAttempts(false, id);        
         handleNewWord();
     }
 
@@ -43,8 +45,8 @@ return(
 
     <div className="card-view" onClick={handleClick}>
     <h5 className="word-view">{word}</h5>
-    <h6 className="word-view">{timesCorrect}/{timesTested}</h6>
-    <ConfidenceLevel timesCorrect={timesCorrect} timesTested={timesTested} />
+    <h6 className="word-view"><TrafficLights recentAttempts={recentAttempts} /></h6>
+    <ConfidenceLevel recentAttempts={recentAttempts} />
 
        <div className={"main-content-view" + (isShowing ? '' : ' hide')}>
         <p>{meaning}</p>

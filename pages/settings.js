@@ -15,7 +15,7 @@ const Settings = ({words}) => {
 
     const resetStatistics = async () => {
 
-        const newWords = words.map(word => { return {...word, timesTested: 0, timesCorrect: 0}});
+        const newWords = words.map(word => { return {...word, recentAttempts: []}});
         console.log(newWords);
         try {
             const res = await fetch('/api/wordsMultiple', {

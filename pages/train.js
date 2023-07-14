@@ -1,6 +1,7 @@
 import dbConnect from '../lib/dbConnect'
 import Word from '../models/Word'
 import RandomWord from '../components/RandomWord';
+
 import { getConfidenceLevel } from '../utilities/confidenceLevel';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
@@ -23,14 +24,14 @@ const Train = ({ words }) => {
   useEffect(() => {
 
     const filterData = () => {
-      
+
       if (cardSet === 'all') {
         setFilteredData(words);
-      } else setFilteredData(words.filter(word => getConfidenceLevel(word.timesCorrect, word.timesTested) === cardSet));
+      } else setFilteredData(words.filter(word => getConfidenceLevel(word.recentAttempts) === cardSet));
     }
 
-    filterData();   
- 
+    filterData();
+
     if (filteredData.length) {
       setRandom(filteredData[Math.floor(Math.random() * filteredData.length)]);
       setMessage('');
@@ -44,18 +45,105 @@ const Train = ({ words }) => {
   const handleNext = () => {
     setNeedNewWord(true);
   }
-  
+
   const handleChangeSelect = () => {
     const level = document.getElementById("selSet").value;
     //console.log(words.filter(word => getConfidenceLevel(word.timesCorrect, word.timesTested) === level))
-    setCardSet(level);  
+    setCardSet(level);
     setNeedNewWord(true);
   }
 
-  const increaseTimesTested = async (id) => {
+  // const increaseTimesTested = async (id) => {
+  //   const word = words.filter(word => word._id === id)[0];
+  //   if (word) {
+  //     const newTimesTested = (word.timesTested || 0) + 1;
+  //     try {
+
+  //       const res = await fetch(`/api/words/${id}`, {
+  //         method: 'PUT',
+  //         headers: {
+  //           Accept: contentType,
+  //           'Content-Type': contentType,
+  //         },
+  //         body: JSON.stringify({
+  //           ...word,
+  //           timesTested: newTimesTested,
+  //         }),
+
+  //       })
+
+
+  //       // Throw error with status code in case Fetch API req failed
+  //       if (!res.ok) {
+  //         throw new Error(res.status)
+  //       }
+  //       console.log("done");
+  //       const { data } = await res.json()
+
+  //       mutate(`/api/words/${id}`, data, false) // Update the local data without a revalidation         
+
+  //     } catch (error) {
+  //       setMessage('Failed to update word')
+  //     }
+
+  //     //update local copy
+  //     // words = words.map(word => {
+  //     //   word._id === id ? {...word, timesTested} : word
+
+  //     // })
+  //     refreshData();
+  //   }
+
+  // }
+
+  // const increaseTimesTestedAndCorrect = async (id) => {
+  //   const word = words.filter(word => word._id === id)[0];
+  //   if (word) {
+  //     try {
+
+  //       const res = await fetch(`/api/words/${id}`, {
+  //         method: 'PUT',
+  //         headers: {
+  //           Accept: contentType,
+  //           'Content-Type': contentType,
+  //         },
+  //         body: JSON.stringify({
+  //           ...word,
+  //           timesTested: (word.timesTested || 0) + 1,
+  //           timesCorrect: (word.timesCorrect || 0) + 1,
+  //         }),
+
+  //       })
+
+
+  //       // Throw error with status code in case Fetch API req failed
+  //       if (!res.ok) {
+  //         throw new Error(res.status)
+  //       }
+  //       console.log("done");
+  //       const { data } = await res.json()
+
+  //       mutate(`/api/words/${id}`, data, false) // Update the local data without a revalidation         
+
+  //     } catch (error) {
+  //       setMessage('Failed to update word')
+  //     }
+
+  //     refreshData();
+  //   }
+  // }
+
+  const addToRecentAttempts = async (isCorrect, id) => {
     const word = words.filter(word => word._id === id)[0];
-    if (word) {
-      const newTimesTested = (word.timesTested || 0) + 1;
+    if (word) {      
+
+           //create the property if it doesn't exist
+           if (!word.recentAttempts) word.recentAttempts = [];
+
+      //cap at 6 attempts
+      if (word.recentAttempts.length === 6) word.recentAttempts.shift();
+  
+      word.recentAttempts.push(isCorrect ? 1 : 0);
       try {
 
         const res = await fetch(`/api/words/${id}`, {
@@ -66,7 +154,7 @@ const Train = ({ words }) => {
           },
           body: JSON.stringify({
             ...word,
-            timesTested: newTimesTested,
+            recentAttempts: word.recentAttempts,
           }),
 
         })
@@ -95,79 +183,42 @@ const Train = ({ words }) => {
 
   }
 
-  const increaseTimesTestedAndCorrect = async (id) => {
-    const word = words.filter(word => word._id === id)[0];
-    if (word) {
-      try {
-
-        const res = await fetch(`/api/words/${id}`, {
-          method: 'PUT',
-          headers: {
-            Accept: contentType,
-            'Content-Type': contentType,
-          },
-          body: JSON.stringify({
-            ...word,
-            timesTested: (word.timesTested || 0) + 1,
-            timesCorrect: (word.timesCorrect || 0) + 1,
-          }),
-
-        })
-
-
-        // Throw error with status code in case Fetch API req failed
-        if (!res.ok) {
-          throw new Error(res.status)
-        }
-        console.log("done");
-        const { data } = await res.json()
-
-        mutate(`/api/words/${id}`, data, false) // Update the local data without a revalidation         
-
-      } catch (error) {
-        setMessage('Failed to update word')
-      }
-
-      refreshData();
-    }
-  }
-
 
 
   return (
     <>
-    <div className="grid wrapper">
-      <div className="card-wrapper">
+      <div className="grid wrapper">
+        <div className="card-wrapper">
 
-        <div>
-          <p>Which words do you want to train?</p>
-          
+          <div>
+            <p>Which words do you want to train?</p>
+
             <select id="selSet" onChange={handleChangeSelect}>
               <option value="all">All 🌍</option>
               <option value="untested">Untested ❓</option>
-              <option value="very-low">Very tricky 😡</option>
+              <option value="very-low">Very tricky 🤯</option>
               <option value="low">Tricky 😓</option>
               <option value="medium-low">A little tricky 🙁</option>
               <option value="medium">Medium 😑</option>
               <option value="medium-high">Fairly easy 🙂</option>
-              <option value="high">Easy 😊</option>              
+              <option value="high">Easy 😊</option>
             </select>
-          
-        </div>
-        {filteredData.length > 0 && 
-        <><RandomWord wordObj={random} handleNewWord={handleNext} increaseTimesTested={increaseTimesTested} increaseTimesTestedAndCorrect={increaseTimesTestedAndCorrect} />
-        <p>Click on the card to see the word's meaning.</p>
-        </>
-        }
 
-       
+          </div>
+          {filteredData.length > 0 &&
+            <><RandomWord wordObj={random} handleNewWord={handleNext} addToRecentAttempts={addToRecentAttempts} />
+              <p>Click on the card to see the word's meaning.</p>
+            </>
+          }
+
+
+        </div>
+
+
+
       </div>
 
-     
-    
-    </div>
-
-    <div className="grid">{message}</div>
+      <div className="grid">{message}</div>
     </>
   )
 }
