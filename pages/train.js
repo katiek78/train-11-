@@ -34,7 +34,7 @@ const Train = ({ words }) => {
     if (filteredData.length) {
       setRandom(filteredData[Math.floor(Math.random() * filteredData.length)]);
       setMessage('');
-    } else setMessage('no cards in this set');
+    } else setMessage('There are no cards of this type! Choose another.');
     setNeedNewWord(false);
     return () => { };
   }, [needNewWord]);
@@ -154,10 +154,13 @@ const Train = ({ words }) => {
             </select>
           
         </div>
-        {filteredData.length > 0 && <RandomWord wordObj={random} handleNewWord={handleNext} increaseTimesTested={increaseTimesTested} increaseTimesTestedAndCorrect={increaseTimesTestedAndCorrect} />
+        {filteredData.length > 0 && 
+        <><RandomWord wordObj={random} handleNewWord={handleNext} increaseTimesTested={increaseTimesTested} increaseTimesTestedAndCorrect={increaseTimesTestedAndCorrect} />
+        <p>Click on the card to see the word's meaning.</p>
+        </>
         }
 
-        <p>Click on the card to see the word's meaning.</p>
+       
       </div>
 
      
