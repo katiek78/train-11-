@@ -436,6 +436,14 @@ li {
   bottom: 10px; 
 }
 
+.btn-container-settings {
+  text-align: center;
+  padding-top: 50px;
+  /* position: absolute;
+  left: 10px;
+  top: 50%;  */
+}
+
 .btn {
   --accent: grey;
   cursor: pointer;

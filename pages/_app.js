@@ -3,6 +3,8 @@ import '../css/form.css'
 import { useState } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faGear } from '@fortawesome/free-solid-svg-icons'
 
 function MyApp({ Component, pageProps }) {
   const [showLinks, setShowLinks] = useState(false);
@@ -28,6 +30,7 @@ function MyApp({ Component, pageProps }) {
           <Link href="/new">Add Word</Link>
           <Link href="/import">Import Words</Link>
           <Link href="/edit-all">Edit All</Link>
+          <Link href="/settings"><FontAwesomeIcon icon={faGear} /></Link>
         </div>
 
         <img
