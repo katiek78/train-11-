@@ -3,7 +3,7 @@ import Link from "next/link";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faCheck,    faXmark } from '@fortawesome/free-solid-svg-icons'
 
-const RandomWord = ({word, meaning, id, handleNewWord}) => {
+const RandomWord = ({word, meaning, id, handleNewWord, increaseTimesTested, increaseTimesTestedAndCorrect}) => {
   
     const [isShowing, setIsShowing] = useState(false);
 
@@ -21,12 +21,14 @@ const RandomWord = ({word, meaning, id, handleNewWord}) => {
     const handleCorrect = (e) => {
         e.stopPropagation();          
         setIsShowing(false);
+        increaseTimesTestedAndCorrect(id);        
         handleNewWord();
     }
 
     const handleIncorrect = (e) => {
         e.stopPropagation();          
         setIsShowing(false);
+        increaseTimesTested(id);        
         handleNewWord();
     }
 

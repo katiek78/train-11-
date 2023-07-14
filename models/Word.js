@@ -19,7 +19,15 @@ const WordSchema = new mongoose.Schema({
   wordType: {
         type: String, 
         enum: ['adjective', 'adverb', 'noun', 'verb', 'multiple', 'other']
-    }
+    },
+  timesTested: {
+      type: Number,
+      default: 0
+  },
+  timesCorrect: {
+    type: Number,
+    default: 0
+  }
 
 })
 
