@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import dbConnect from '../lib/dbConnect'
 import Word from '../models/Word'
+import TrafficLights from '../components/TrafficLights'
+import ConfidenceLevel from '../components/ConfidenceLevel'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect } from 'react'
@@ -79,7 +81,9 @@ const Index = ({ words }) => {
           </div>
           <div className={"card flip-card-back" + " " + (word.wordType || "")}>
             <h5 className="meaning">{word.meaning}</h5>
-          
+            <h5><ConfidenceLevel recentAttempts={word.recentAttempts} /></h5>
+            <h5><TrafficLights recentAttempts={word.recentAttempts} /></h5>
+           
           
             <div className='buttons'>
             <Link href="/[id]/edit" as={`/${word._id}/edit`} legacyBehavior><FontAwesomeIcon className='btn' icon={faEdit} /></Link>

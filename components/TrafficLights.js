@@ -1,5 +1,5 @@
 const TrafficLights = ({ recentAttempts = [] }) => {   
-    return <div>
+    return <div className='traffic-lights'>
         {recentAttempts.map(attempt => attempt ? "🟢" : "🔴")}
     </div>;
   }
