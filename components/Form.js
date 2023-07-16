@@ -95,9 +95,8 @@ const Form = ({ formId, wordForm, forNewWord = true }) => {
     }
   }
 
-  //not sure why I need to do this, since <select value={form.wordType || 'adjective'}...
+  //make sure it uses 'adjective' if word type undefined - could also check value of the select box?
   if (typeof form.wordType === 'undefined') {
-    console.log("here")
     setForm({
       ...form,
       wordType: 'adjective',

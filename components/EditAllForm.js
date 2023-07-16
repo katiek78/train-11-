@@ -8,10 +8,15 @@ const EditAllForm = ({ formId, editAllForm }) => {
     // const [errors, setErrors] = useState({})
     const [message, setMessage] = useState('')
 
-    const [form, setForm] = useState({
-        words: editAllForm.words        
+    const [form, setForm] = useState({      
+       // check that any undefined word types are 'adjective'
+      ...editAllForm.words, words: editAllForm.words.map(word => {
+        if (typeof word.wordType === 'undefined') {
+          return {...word, wordType: 'adjective'}
+        } else return word;
       })
-  
+      })
+
     const handleChange = (e) => {
         const target = e.target     
 
@@ -57,6 +62,15 @@ const EditAllForm = ({ formId, editAllForm }) => {
 
     const handleSubmit = (e) => {
       e.preventDefault()
+    
+  
+      
+    console.log({...form, words: form.words.map(word => {
+      if (typeof word.wordType === 'undefined') {
+        return {...word, wordType: 'adjective'}
+      } else return word;
+    })}) ;
+    
       putData(form)
     }
    
