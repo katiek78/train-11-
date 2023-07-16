@@ -25,17 +25,20 @@ const Index = ({ words }) => {
   }
 
   const handleDelete = async (id) => {
-    //remove it from our word set so it disappears from the view 
-    setFilterData(filterData.filter(word => word._id !== id));
+    const confirmed = window.confirm('Are you sure you want to delete this word?');
+    if (confirmed) {
+      //remove it from our word set so it disappears from the view 
+      setFilterData(filterData.filter(word => word._id !== id));
 
-    //remove it from the database
-    try {
-      await fetch(`/api/words/${id}`, {
-        method: 'Delete',
-      })
-      router.push('/')
-    } catch (error) {
-      setMessage('Failed to delete the word.')
+      //remove it from the database
+      try {
+        await fetch(`/api/words/${id}`, {
+          method: 'Delete',
+        })
+        router.push('/')
+      } catch (error) {
+        setMessage('Failed to delete the word.')
+      }
     }
   }
 
