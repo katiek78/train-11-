@@ -38,6 +38,11 @@ export const createFractionsQuestion = () => {
     // Simplify the fraction by dividing both numerator and denominator by their gcd
     var simplifiedNumerator = numerator / divisor;
     var simplifiedDenominator = denominator / divisor;
+
+    if (simplifiedDenominator < 0) {
+           simplifiedDenominator = -simplifiedDenominator;
+           simplifiedNumerator = -simplifiedNumerator;
+     }
   
     //return [simplifiedNumerator, simplifiedDenominator];
     return simplifiedNumerator + "/" + simplifiedDenominator;
@@ -112,7 +117,16 @@ const createWordFractionsQuestion = () => {
 
     switch(chosenSentence.description) {
         case "whatIsLeft":
-            const { numerator, denominator} = whatIsLeft(1, variablesObj.fraction1, variablesObj.fraction2);
+            let { numerator, denominator} = whatIsLeft(1, variablesObj.fraction1, variablesObj.fraction2);
+            while (numerator < 1) {
+                //replace all the fractions
+                for (const key in variablesObj) {
+                    if (key.includes("fraction")) {
+                        variablesObj[key] = getRandomFraction();
+                    }
+                }
+                ({ numerator, denominator} = whatIsLeft(1, variablesObj.fraction1, variablesObj.fraction2));
+            }
             answer = simplifyFraction(numerator, denominator);
          
             break;
@@ -147,7 +161,7 @@ const getVariableNames = (sentence) => {
             variablesObj[variable] = getRandomName();
         } else if (variable.includes("fraction")) {
             variablesObj[variable] = getRandomFraction();
-        } else variablesObj[variable] = "cake";
+        } else variablesObj[variable] = getRandomFood();
     })
     
     //return the object
@@ -158,6 +172,12 @@ const getRandomName = () => {
     const names = ['Adam', 'Amelia', 'Anna', 'Ali', 'Bethany', 'Boris', 'Caleb', 'Charlotte', 'Dan', 'Dev', 'Emily', 'Ethan', 'Freya', 'Freddie', 'Gavin', 'George', 'Greta', 'Harry', 'Helen', 'Ishaan', 'Isabelle', 'Jenny', 'Jack', 'Katie', 'Lauren', 'Luca', 'Millie', 'Nathan', 'Oliver', 'Paula', 'Robin', 'Rishab', 'Sunny', 'Stella', 'Tim', 'Tom', 'Vera', 'Wendy', 'Zoe', 'Zac'];
     return names[Math.floor(Math.random() * names.length)];
 }
+
+const getRandomFood = () => {
+    const foods = ['cake', 'pizza', 'paella', 'pie', 'rhubarb crumble'];
+    return foods[Math.floor(Math.random() * foods.length)];
+}
+
 
 const getRandomFraction = () => {
     //should simplify here**
