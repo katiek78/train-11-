@@ -5,10 +5,16 @@ const MathsQuestion = ({question, answer, refreshQuestion}) => {
 
     const [isChecked, setIsChecked] = useState(false);
     const [isCorrect, setIsCorrect] = useState(false);
+    //const [answerGiven, setAnswerGiven] = useState('');
 
     useEffect(() => {
-        setIsChecked(false);        
+        setIsChecked(false);  
+        clearInput();          
     }, [question])
+
+    const clearInput = () => {
+        document.getElementById("inpAnswer").value = "";
+    }
 
     const handleClickCheck = () => {
         setIsChecked(true);
