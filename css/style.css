@@ -127,13 +127,16 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
   text-align: center;
   padding: 45px 0;
+  cursor: pointer;
 }
 
 .subjectCard:hover {
-  
+  font-size:115%;
+  background-color: #444;
+  padding: 43px 0;
 }
 
-.subjectCard a {
+.subjectCard * {
   text-decoration: none;
   color: white;
  
