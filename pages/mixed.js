@@ -1,4 +1,5 @@
-import { createAlgebraQuestion } from '../questions/algebra'
+import { createAlgebraQuestion} from '../questions/algebra'
+import { createFractionsQuestion } from '../questions/fractions';
 import MathsQuestion from '../components/MathsQuestion';
 import { useState, useEffect } from "react"
 
@@ -9,11 +10,35 @@ const Mixed = () => {
 
     useEffect(() => {
         if (needNewQuestion) {
-            setQuestion(createAlgebraQuestion());
+            setQuestion(createRandomQuestion());
             setNeedNewQuestion(false);
         }
 
     },[needNewQuestion])
+
+    const questionTypes = ['fractions', 'algebra'];
+    const createRandomQuestion = () => {
+        const chosenTypeIndex = Math.floor(Math.random() * questionTypes.length);
+        const chosenType = questionTypes[chosenTypeIndex];
+//         const functionName = 'create' + chosenType + 'Question';
+//         const questionFunction = Function(functionName);
+// console.log(questionFunction);
+//         if (typeof questionFunction === 'function') {
+//           return questionFunction();          
+//         } else {
+//           throw new Error('Invalid question type');
+//         }
+        switch (chosenType) {
+            case 'fractions':
+                return createFractionsQuestion();
+                break;
+            case 'algebra':
+                return createAlgebraQuestion();
+                break;
+            default:
+                throw new Error("Invalid question type selected");
+        }
+    }
 
     const refreshQuestion = () => {
         console.log("here");
