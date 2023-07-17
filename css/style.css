@@ -108,7 +108,38 @@
   font-size: 50px;
 } */
 
-/* Styles for Cards */
+
+.subjectLinks {
+  display:flex;
+  flex-direction: column;
+}
+
+.subjectCard {
+  width: 200px;
+  height: 100px;
+  background-color: #333;
+  color:white;
+  border: 1.25px solid rgb(233, 233, 233);
+  border-radius: 16px;
+  margin: 10px;
+  position: relative;
+  font-size: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+  text-align: center;
+  padding: 45px 0;
+}
+
+.subjectCard:hover {
+  
+}
+
+.subjectCard a {
+  text-decoration: none;
+  color: white;
+ 
+}
+
+/* Styles for Word Cards */
 .card {
   display: inline-block;
   width: 200px;
