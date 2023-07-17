@@ -150,6 +150,27 @@
   background-color: #2b89f5;
 }
 
+.maths-question-page {
+  display:flex;
+  flex-direction: column;
+}
+
+.maths-question-container {
+  width: 300px;
+  background-color: #ffb6c1;
+  padding: 20px;
+  border-radius: 16px
+}
+
+.maths-question {
+  font-weight: bold;
+  font-size: 150%;
+}
+
+.maths-answer {
+  
+}
+
 /* Styles for Word Cards */
 .card {
   display: inline-block;
