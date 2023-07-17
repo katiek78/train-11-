@@ -13,7 +13,7 @@ const Index = () => {
    
            
       <div className="subjectLinks">      
-     
+      <h1>Choose a subject:</h1>
       <Link href="/wordsIndex" legacyBehavior><div className="subjectCard">Words</div></Link>
       <Link href="/maths" legacyBehavior><div className="subjectCard">Maths</div></Link>
           </div>
