@@ -162,6 +162,10 @@
   border-radius: 16px
 }
 
+.maths-question-container * {
+  margin: 5px;
+}
+
 .maths-question {
   font-weight: bold;
   font-size: 150%;
