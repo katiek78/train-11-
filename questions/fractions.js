@@ -84,7 +84,8 @@ const createSimpleFractionsQuestion = () => {
 
 const createWordFractionsQuestion = () => {    
     const sentences = [
-        {sentence: '<name1> and <name2> cooked a <food>. <name1> ate <fraction1> of the <food> and <name2> ate <fraction2> of the <food>. What fraction of the <food> was left?', description: "whatIsLeft"}
+        {sentence: '<name1> and <name2> cooked a <food>. <name1> ate <fraction1> of the <food> and <name2> ate <fraction2> of the <food>. What fraction of the <food> was left?', description: "whatIsLeft"},
+        {sentence: 'A group of <group> were going to <place>. <fraction1> of them went by <transport1> and <fraction2> of them went by <transport2>. The rest went by <transport3>. What fraction went by <transport3>?', description: "whatIsLeft"}
     ]
 
     const chosenSentenceIndex = Math.floor(Math.random() * sentences.length);
@@ -99,7 +100,7 @@ const createWordFractionsQuestion = () => {
     switch(chosenSentence.description) {
         case "whatIsLeft":
             let { numerator, denominator} = whatIsLeft(1, variablesObj.fraction1, variablesObj.fraction2);
-            while (numerator < 1) {
+            while (numerator < 1 || denominator < 1) {
                 //replace all the fractions
                 for (const key in variablesObj) {
                     if (key.includes("fraction")) {
@@ -109,7 +110,7 @@ const createWordFractionsQuestion = () => {
                 ({ numerator, denominator} = whatIsLeft(1, variablesObj.fraction1, variablesObj.fraction2));
             }
             answer = simplifyFraction(numerator, denominator);
-         
+            console.log(variablesObj);
             break;
         default:
             answer = "";
@@ -142,7 +143,15 @@ const getVariableNames = (sentence) => {
             variablesObj[variable] = getRandomName();
         } else if (variable.includes("fraction")) {
             variablesObj[variable] = getRandomFraction();
-        } else variablesObj[variable] = getRandomFood();
+        } else if (variable.includes("group")) {
+            variablesObj[variable] = getRandomGroup(variablesObj);
+        } else if (variable.includes("place")) {
+            variablesObj[variable] = getRandomPlace(variablesObj);
+        } else if (variable.includes("transport")) {
+            variablesObj[variable] = getRandomTransport(variablesObj);
+        } else if (variable.includes("food")) {
+            variablesObj[variable] = getRandomFood();
+        }
     })
     
     //return the object
@@ -157,6 +166,33 @@ const getRandomName = () => {
 const getRandomFood = () => {
     const foods = ['cake', 'pizza', 'paella', 'pie', 'rhubarb crumble'];
     return foods[Math.floor(Math.random() * foods.length)];
+}
+
+const getRandomGroup = (variablesObj) => {
+    const groups = ['friends', 'schoolchildren', 'elderly people', 'nuns', 'footballers', 'cricketers', 'teachers'];
+    let selectedGroup = groups[Math.floor(Math.random() * groups.length)];    
+    while (isStringFoundInObject(variablesObj, selectedGroup)) {
+        selectedGroup = groups[Math.floor(Math.random() * groups.length)];
+    }
+    return selectedGroup;
+}
+
+const getRandomPlace = (variablesObj) => {
+    const places = ['Alton Towers', 'Disneyland', 'the Trafford Centre', 'Timperley village', 'London', 'Edinburgh', 'Chessington World of Adventures'];
+    let selectedPlace = places[Math.floor(Math.random() * places.length)];
+    while (isStringFoundInObject(variablesObj, selectedPlace)) {
+        selectedPlace = places[Math.floor(Math.random() * places.length)];
+    }
+    return selectedPlace;
+}
+
+const getRandomTransport = (variablesObj) => {
+    const transports = ['bus', 'car', 'train', 'motorbike', 'hovercraft', 'tram', 'coach'];
+    let selectedTransport = transports[Math.floor(Math.random() * transports.length)];
+    while (isStringFoundInObject(variablesObj, selectedTransport)) {
+        selectedTransport = transports[Math.floor(Math.random() * transports.length)];
+    }
+    return selectedTransport;
 }
 
 
@@ -246,4 +282,15 @@ const convertToFraction = (value) => {
     return numerator + "/" + denominator;
   };
   
-  
+  const isStringFoundInObject = (obj, searchStr) => {
+  for (const key in obj) {
+    if (typeof obj[key] === 'object') {
+      if (isStringFoundInObject(obj[key], searchStr)) {
+        return true;
+      }
+    } else if (typeof obj[key] === 'string' && obj[key].includes(searchStr)) {
+      return true;
+    }
+  }
+  return false;
+};
