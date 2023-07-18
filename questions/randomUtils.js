@@ -156,4 +156,5 @@ const names = ['Adam', 'Amelia', 'Anna', 'Ali', 'Bethany', 'Boris', 'Caleb', 'Ch
 const places = ['Alton Towers', 'Disneyland', 'the Trafford Centre', 'Timperley village', 'London', 'Edinburgh', 'Chessington World of Adventures'];
 const smallThings = ['sweets', 'marbles', 'socks'];
 const transports = ['bus', 'car', 'train', 'motorbike', 'hovercraft', 'tram', 'coach'];
+const objects = ['sofa', 'holiday', 'laptop', 'car', 'fridge', 'desk']
   
