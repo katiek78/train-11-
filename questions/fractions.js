@@ -93,18 +93,19 @@ const createWordFractionsQuestion = () => {
     
     const variablesObj = getVariableNames(chosenSentence.sentence);
 
-    const question = replaceTagsWithValues(variablesObj, chosenSentence.sentence);
-
+    
     let answer;
 
     switch(chosenSentence.description) {
         case "whatIsLeft":
             let { numerator, denominator} = whatIsLeft(1, variablesObj.fraction1, variablesObj.fraction2);
-            while (numerator < 1 || denominator < 1) {
+            while (numerator < 1 || denominator < 1 || numerator === 0) {
+                console.log("replacing " + numerator + " and " + denominator);
                 //replace all the fractions
                 for (const key in variablesObj) {
                     if (key.includes("fraction")) {
                         variablesObj[key] = getRandomFraction();
+                        console.log(key);
                     }
                 }
                 ({ numerator, denominator} = whatIsLeft(1, variablesObj.fraction1, variablesObj.fraction2));
@@ -115,6 +116,9 @@ const createWordFractionsQuestion = () => {
         default:
             answer = "";
     }
+
+    const question = replaceTagsWithValues(variablesObj, chosenSentence.sentence);
+    
 
     return {question, answer}
 }
