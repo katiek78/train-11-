@@ -142,7 +142,7 @@ export const getRandomMainNumber = () => {
 }
 
 
-const getRandomFraction = () => {
+export const getRandomFraction = () => {
     //should simplify here**
     const denominator = Math.floor(Math.random() * 10) + 2;
     const numerator = Math.floor(Math.random() * (denominator - 1)) + 1;
