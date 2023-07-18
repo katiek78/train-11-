@@ -1,4 +1,4 @@
-import { getRandomPercentage, replaceTagsWithValues, getVariables, getRandomMainNumber} from "./randomUtils";
+import { getRandomPercentage, replaceTagsWithValues, getVariables, getRandomMainNumber, getNextNoteUp} from "./randomUtils";
 
 export const createPercentagesQuestion = () => {
     const questionTypes = ['simple', 'word']
@@ -48,9 +48,10 @@ const createSimplePercentagesQuestion = () => {
   const createWordPercentagesQuestion = () => {
   
     const sentences = [
-        {sentence: 'There are <mainNumber> children in a class. <percentage>% of them go on a school trip. How many children do not go on the trip?', description: "howManyLeftPercentage"},
-        {sentence: 'There are <mainNumber> <smallThing> in a bag. <percentage>% of them are <colour1>, the rest are <colour2>. How many <smallThing> are <colour2>?', description: "howManyLeftPercentage"},
-        {sentence: 'A <object> has been reduced in price by <percentage>%. If the original price was <mainNumber>, what is the new price?', description: "howManyLeftPercentage"},
+        // {sentence: 'There are <mainNumber> children in a class. <percentage>% of them go on a school trip. How many children do not go on the trip?', description: "howManyLeftPercentage"},
+        // {sentence: 'There are <mainNumber> <smallThing> in a bag. <percentage>% of them are <colour1>, the rest are <colour2>. How many <smallThing> are <colour2>?', description: "howManyLeftPercentage"},
+        // {sentence: 'A <object> has been reduced in price by <percentage>%. If the original price was <mainNumber>, what is the new price?', description: "howManyLeftPercentage"},
+        {sentence: '<name> is buying a <object>. It usually costs £<mainNumber> but today there is <percentage>% off. What change will <name> get from a £<nextNoteUp> note?', description: "howManyLeftPlusChangePercentage"},
     ]
    
     const chosenSentenceIndex = Math.floor(Math.random() * sentences.length);
@@ -67,6 +68,19 @@ const createSimplePercentagesQuestion = () => {
                 variablesObj.percentage = getRandomPercentage();
                 variablesObj.mainNumber = getRandomMainNumber();
                 answer = (100 - variablesObj.percentage) / 100 * variablesObj.mainNumber;
+            }
+            console.log(variablesObj);
+            break;
+         case "howManyLeftPlusChangePercentage":            
+            let newPrice = (100 - variablesObj.percentage) / 100 * variablesObj.mainNumber;
+            variablesObj.nextNoteUp = getNextNoteUp(newPrice);
+            answer = variablesObj.nextNoteUp - newPrice;
+            while (!Number.isInteger(newPrice) || variablesObj.percentage === 0 || variablesObj.nextNoteUp === 0) {
+                variablesObj.percentage = getRandomPercentage();
+                variablesObj.mainNumber = getRandomMainNumber();
+                variablesObj.nextNoteUp = getNextNoteUp((100 - variablesObj.percentage) / 100 * variablesObj.mainNumber);               
+                newPrice = (100 - variablesObj.percentage) / 100 * variablesObj.mainNumber
+                answer = variablesObj.nextNoteUp - newPrice;
             }
             console.log(variablesObj);
             break;

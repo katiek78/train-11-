@@ -63,6 +63,9 @@ export const getVariables = (sentence) => {
             variablesObj[variable] = getRandomPercentage();
         } else if (variable.includes("mainNumber")) {
             variablesObj[variable] = getRandomMainNumber();
+        } else if (variable.includes("nextNoteUp")) {
+            variablesObj[variable] = getNextNoteUp((100 - variablesObj.percentage) / 100 * variablesObj.mainNumber);
+        
         } else variablesObj[variable] = getRandomItem(variablesObj, removeNumbersFromString(variable));
     })
     
@@ -147,6 +150,19 @@ export const getRandomFraction = () => {
     const denominator = Math.floor(Math.random() * 10) + 2;
     const numerator = Math.floor(Math.random() * (denominator - 1)) + 1;
     return ({numerator, denominator});
+}
+
+export const getNextNoteUp = (amount) => {
+  const noteValues = [5, 10, 20, 50];
+  const highestNote = Math.max(...noteValues);
+  if (amount > highestNote) return 0;
+
+  for (let i = 0; i < noteValues.length; i++) {
+    const note = noteValues[i];
+    if (amount <= note) {
+      return note;
+    }
+  }
 }
 
 const colours = ['blue', 'red', 'yellow' ,'green', 'orange', 'purple'];
