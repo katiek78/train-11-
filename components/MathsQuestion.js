@@ -5,8 +5,6 @@ const MathsQuestion = ({question, answer, refreshQuestion}) => {
 
     const [isChecked, setIsChecked] = useState(false);
     const [isCorrect, setIsCorrect] = useState(false);
-    
-    console.log(answer);
 
     useEffect(() => {
         setIsChecked(false);  

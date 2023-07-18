@@ -15,17 +15,6 @@ export const createFractionsQuestion = () => {
     }
   }
   
-  // Helper function to simplify fractions
-//   function simplifyFraction(numerator, denominator) {
-//     var gcd = calculateGCD(numerator, denominator);
-//     let newNumerator = numerator / gcd;
-//     let newDenominator = denominator / gcd;
-//     if (newDenominator < 0) {
-//         newDenominator = -newDenominator;
-//         newNumerator = -newNumerator;
-//     }
-//     return newNumerator + "/" + newDenominator;
-//   }
 
   function simplifyFraction(numerator, denominator) {
     if (denominator === 0) {
@@ -47,14 +36,6 @@ export const createFractionsQuestion = () => {
     //return [simplifiedNumerator, simplifiedDenominator];
     return simplifiedNumerator + "/" + simplifiedDenominator;
   }
-  
-  // Helper function to calculate the greatest common divisor (GCD)
-//   function calculateGCD(a, b) {
-//     if (b === 0) {
-//       return a;
-//     }
-//     return calculateGCD(b, a % b);
-//   }
 
   function calculateGCD(a, b) {
     while (b !== 0) {

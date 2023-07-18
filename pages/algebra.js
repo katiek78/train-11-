@@ -17,8 +17,7 @@ const Algebra = () => {
     },[needNewQuestion])
 
     
-    const refreshQuestion = () => {
-        console.log("here");
+    const refreshQuestion = () => {       
         setNeedNewQuestion(true);
     }
 

@@ -41,7 +41,7 @@ const Mixed = () => {
     }
 
     const refreshQuestion = () => {
-        console.log("here");
+       
         setNeedNewQuestion(true);
     }
 

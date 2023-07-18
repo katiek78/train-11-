@@ -1,7 +1,8 @@
 export const createAlgebraQuestion = () => {
     
     // Generate a random integer value for x
-    const x = Math.floor(Math.random() * 20) - 10; // Allow negative value
+    //const x = Math.floor(Math.random() * 20) - 10; // Allow negative value
+    const x = Math.floor(Math.random() * 10); // Don't allow negative value
   
     // Generate random coefficients
     let a, b;
@@ -15,7 +16,7 @@ export const createAlgebraQuestion = () => {
     const d = a * x + c - b * x;
   
     // Generate a random variable letter (a, b, c, d, x, y)
-    const variables = ["a", "b", "c", "d", "x", "y"];
+    const variables = ["a", "b", "c", "d", "𝑥", "y"];
     const variable = variables[Math.floor(Math.random() * variables.length)];
   
     // Adjust the operator and constant based on the sign
@@ -25,7 +26,7 @@ export const createAlgebraQuestion = () => {
     const rhsConstant = Math.abs(d);
   
     // Generate the question
-    const question = a + variable + operator + constant + " = " + b + variable + rhsOperator + rhsConstant;
+    const question = (a === 1 ? "" : a) + variable + (constant === 0 ? "" : operator + constant) + " = " + (b === 1 ? "" : b) + variable + (rhsConstant === 0 ? "" : rhsOperator + rhsConstant);
   
     return { question: question, answer: x };
   }
