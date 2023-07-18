@@ -27,7 +27,7 @@ function MyApp({ Component, pageProps }) {
         <div className={`navbar-links ${showLinks ? "show" : ""}`}>
           <Link href="/">Home</Link>
           <Link href="/maths">Maths</Link>
-          <Link href="/words">Words</Link>
+          <Link href="/wordsIndex">Words</Link>
           <Link href="/train">Train Words</Link>
           <Link href="/new">Add Word</Link>
           <Link href="/import">Import Words</Link>
