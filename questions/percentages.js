@@ -46,7 +46,7 @@ const createSimplePercentagesQuestion = () => {
  
 
   const createWordPercentagesQuestion = () => {
-  
+
     const sentences = [
         {sentence: 'There are <mainNumber> children in a school. <percentage>% of them have hot dinners. How many children do not have hot dinners?', description: "howManyLeftPercentage"},
         {sentence: 'There are <mainNumber> <smallThing> in a bag. <percentage>% of them are <colour1>, the rest are <colour2>. How many <smallThing> are <colour2>?', description: "howManyLeftPercentage"},
