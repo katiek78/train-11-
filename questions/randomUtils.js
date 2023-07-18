@@ -165,12 +165,14 @@ export const getNextNoteUp = (amount) => {
   }
 }
 
-const colours = ['blue', 'red', 'yellow' ,'green', 'orange', 'purple'];
-const foods = ['cake', 'pizza', 'paella', 'pie', 'rhubarb crumble'];
-const groups = ['friends', 'schoolchildren', 'elderly people', 'nuns', 'footballers', 'cricketers', 'teachers'];
-const names = ['Adam', 'Amelia', 'Anna', 'Ali', 'Bethany', 'Boris', 'Caleb', 'Charlotte', 'Dan', 'Dev', 'Emily', 'Ethan', 'Freya', 'Freddie', 'Gavin', 'George', 'Greta', 'Harry', 'Helen', 'Ishaan', 'Isabelle', 'Jenny', 'Jack', 'Katie', 'Lauren', 'Luca', 'Millie', 'Nathan', 'Oliver', 'Paula', 'Robin', 'Rishab', 'Sunny', 'Stella', 'Tim', 'Tom', 'Vera', 'Wendy', 'Zoe', 'Zac'];
+const colours = ['blue', 'red', 'yellow' ,'green', 'orange', 'purple', 'pink'];
+const foods = ['cake', 'pizza', 'paella', 'pie', 'rhubarb crumble', 'lemon meringue pie'];
+const groups = ['friends', 'schoolchildren', 'elderly people', 'nuns', 'footballers', 'cricketers', 'teachers', 'doctors', 'hairdressers', 'software developers'];
+const names = ['Adam', 'Amelia', 'Anna', 'Ali', 'Ben', 'Bethany', 'Boris', 'Caleb', 'Charlotte', 'Chloe', 'Dan', 'Dev', 'Eesa', 'Emily', 'Ethan', 'Freya', 'Freddie', 'Gavin', 
+'George', 'Greta', 'Harriet', 'Harry', 'Helen', 'Ishaan', 'Isabelle', 'Jenny', 'Jack', 'Josh', 'Kath', 'Katie', 'Lauren', 'Lily', 'Luca', 'Millie', 'Nathan','Olive', 'Oliver',
+ 'Paula', 'Robin', 'Rohan', 'Roy', 'Rishab', 'Simon', 'Sunny', 'Stella', 'Steve', 'Tim', 'Toby', 'Tom', 'Vera', 'Wendy', 'Zoe', 'Zac'];
 const places = ['Alton Towers', 'Disneyland', 'the Trafford Centre', 'Timperley village', 'London', 'Edinburgh', 'Chessington World of Adventures'];
-const smallThings = ['sweets', 'marbles', 'socks'];
-const transports = ['bus', 'car', 'train', 'motorbike', 'hovercraft', 'tram', 'coach'];
-const objects = ['sofa', 'holiday', 'laptop', 'car', 'fridge', 'desk']
+const smallThings = ['bouncy balls', 'sweets', 'marbles', 'pegs', 'socks', 'stickers'];
+const transports = ['bus', 'car', 'train', 'bike', 'motorbike', 'scooter', 'tram', 'coach', 'boat'];
+const objects = ['sofa', 'holiday', 'laptop', 'car', 'fridge', 'desk', 'washing machine']
   

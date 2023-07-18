@@ -37,7 +37,7 @@ const createSimplePercentagesQuestion = () => {
   }
 
   // Generate the question
-  const question = `What is ${percentage}% of ${mainNumber}`;
+  const question = `What is ${percentage}% of ${mainNumber}?`;
 
 
   return { question: question, answer: answer };
@@ -48,9 +48,9 @@ const createSimplePercentagesQuestion = () => {
   const createWordPercentagesQuestion = () => {
   
     const sentences = [
-        // {sentence: 'There are <mainNumber> children in a class. <percentage>% of them go on a school trip. How many children do not go on the trip?', description: "howManyLeftPercentage"},
-        // {sentence: 'There are <mainNumber> <smallThing> in a bag. <percentage>% of them are <colour1>, the rest are <colour2>. How many <smallThing> are <colour2>?', description: "howManyLeftPercentage"},
-        // {sentence: 'A <object> has been reduced in price by <percentage>%. If the original price was <mainNumber>, what is the new price?', description: "howManyLeftPercentage"},
+        {sentence: 'There are <mainNumber> children in a school. <percentage>% of them have hot dinners. How many children do not have hot dinners?', description: "howManyLeftPercentage"},
+        {sentence: 'There are <mainNumber> <smallThing> in a bag. <percentage>% of them are <colour1>, the rest are <colour2>. How many <smallThing> are <colour2>?', description: "howManyLeftPercentage"},
+        {sentence: 'A <object> has been reduced in price by <percentage>%. If the original price was £<mainNumber>, what is the new price?', description: "howManyLeftPercentage"},
         {sentence: '<name> is buying a <object>. It usually costs £<mainNumber> but today there is <percentage>% off. What change will <name> get from a £<nextNoteUp> note?', description: "howManyLeftPlusChangePercentage"},
     ]
    
