@@ -1,5 +1,6 @@
 import { createAlgebraQuestion} from '../questions/algebra'
 import { createFractionsQuestion } from '../questions/fractions';
+import { createPercentagesQuestion } from '../questions/percentages';
 import MathsQuestion from '../components/MathsQuestion';
 import { useState, useEffect } from "react"
 
@@ -34,6 +35,9 @@ const Mixed = () => {
                 break;
             case 'algebra':
                 return createAlgebraQuestion();
+                break;
+            case 'percentages':
+                return createPercentagesQuestion();
                 break;
             default:
                 throw new Error("Invalid question type selected");

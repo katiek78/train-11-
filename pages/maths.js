@@ -14,6 +14,7 @@ return(
       <Link href="/mixed" legacyBehavior><div className="subjectCard">Mixed Practice</div></Link>
       <Link href="/algebra" legacyBehavior><div className="subjectCard">Algebra</div></Link>
       <Link href="/fractions" legacyBehavior><div className="subjectCard">Fractions</div></Link>
+      <Link href="/percentages" legacyBehavior><div className="subjectCard">Percentages</div></Link>
           </div>
          
          </div>
