@@ -31,7 +31,7 @@ const Percentages = () => {
             <div className="maths-question-page">
         <h1>Percentages Practice</h1>
         <MathsQuestion question={question.question} answer={question.answer} refreshQuestion={refreshQuestion} />
-        {/* <PieChart data={data} colors={colors} /> */}
+        <PieChart data={data} colors={colors} />
         </div>
         </div>
     )

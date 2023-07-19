@@ -135,8 +135,36 @@ export const getRandomMainNumber = () => {
 
 
   const getRandomItem = (variablesObj, itemType) => {
-    const itemArrayName = itemType + "s";
-    const itemArray = eval(itemArrayName);
+    //const itemArrayName = itemType + "s";
+    // const itemArray = eval(itemArrayName); //this doesn't work on mobile or tablet
+    let itemArray;
+    
+    switch(itemType) {
+      case 'colour':
+        itemArray = colours;
+        break;
+      case 'food':
+        itemArray = foods;
+        break;
+      case 'group':
+        itemArray = groups;
+        break;
+      case 'name':
+          itemArray = names;
+          break;
+      case 'place':
+        itemArray = places;
+        break;
+        case 'smallThing':
+          itemArray = smallThings;
+          break;
+          case 'transport':
+            itemArray = transports;
+            break;
+            case 'object':
+              itemArray = objects;
+              break;
+    }
     let selectedItem = itemArray[Math.floor(Math.random() * itemArray.length)];    
     while (isStringFoundInObject(variablesObj, selectedItem)) {
         selectedItem = itemArray[Math.floor(Math.random() * itemArray.length)]; 
