@@ -9,7 +9,8 @@ const PieChart2 = ({ data, colors, labels }) => {
   const generatePieChart = (data, colors, labels) => {
     var canvas = document.getElementById("can");
     var ctx = canvas.getContext("2d");
-    var lastend = 0;
+    // var lastend = 0;
+    var lastend = - Math.PI / 2
     // var data = [60,210,90];
     var myTotal = 0;
     // var myColor = ['#afcc4c', '#95b524','#c1dd54'];
