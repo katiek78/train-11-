@@ -75,11 +75,18 @@ export const getVariables = (sentence) => {
     return variablesObj
 }
 
-export const getRandomPercentage = () => {
-    const randomDecimal = Math.random(); // Generate a random decimal between 0 and 1
-    const roundedPercentage = Math.round(randomDecimal * 100); // Convert to a whole number percentage between 0 and 100
-    const roundedAndAdjusted = Math.floor(roundedPercentage / 5) * 5; // Round down to the nearest multiple of 5
+export const getRandomPercentage = (min = 0, max = 100) => {
+    let randomDecimal = Math.random(); // Generate a random decimal between 0 and 1    
+    let roundedPercentage = Math.round(randomDecimal * 100); // Convert to a whole number percentage between 0 and 100
+    let roundedAndAdjusted = Math.floor(roundedPercentage / 5) * 5; // Round down to the nearest multiple of 5
   
+    while (roundedAndAdjusted < min || roundedAndAdjusted > max) {
+      randomDecimal = Math.random(); // Generate a random decimal between 0 and 1    
+      roundedPercentage = Math.round(randomDecimal * 100); // Convert to a whole number percentage between 0 and 100
+      roundedAndAdjusted = Math.floor(roundedPercentage / 5) * 5; // Round down to the nearest multiple of 5
+      
+    }
+
     return roundedAndAdjusted;
 };
 
@@ -134,11 +141,11 @@ export const getRandomMainNumber = () => {
   };
 
 
-  const getRandomItem = (variablesObj, itemType) => {
+  export const getRandomItem = (variablesObj, itemType) => {
     //const itemArrayName = itemType + "s";
     // const itemArray = eval(itemArrayName); //this doesn't work on mobile or tablet
     let itemArray;
-    
+
     switch(itemType) {
       case 'colour':
         itemArray = colours;
@@ -152,18 +159,22 @@ export const getRandomMainNumber = () => {
       case 'name':
           itemArray = names;
           break;
+      case 'object':
+        itemArray = objects;
+        break;
       case 'place':
         itemArray = places;
         break;
-        case 'smallThing':
-          itemArray = smallThings;
-          break;
-          case 'transport':
-            itemArray = transports;
-            break;
-            case 'object':
-              itemArray = objects;
-              break;
+      case 'smallThing':
+        itemArray = smallThings;
+        break;
+      case 'sport':
+        itemArray = sports;
+        break;
+      case 'transport':
+        itemArray = transports;
+        break;
+      
     }
     let selectedItem = itemArray[Math.floor(Math.random() * itemArray.length)];    
     while (isStringFoundInObject(variablesObj, selectedItem)) {
@@ -179,6 +190,12 @@ export const getRandomFraction = () => {
     const numerator = Math.floor(Math.random() * (denominator - 1)) + 1;
     return ({numerator, denominator});
 }
+
+export const areAllMembersUnique = (arr) => {  
+  const uniqueSet = new Set(arr);  
+  return uniqueSet.size === arr.length;
+}
+
 
 export const getNextNoteUp = (amount) => {
   const noteValues = [5, 10, 20, 50];
@@ -201,6 +218,7 @@ const names = ['Adam', 'Amelia', 'Anna', 'Ali', 'Ben', 'Bethany', 'Boris', 'Cale
  'Paula', 'Robin', 'Rohan', 'Roy', 'Rishab', 'Simon', 'Sunny', 'Stella', 'Steve', 'Tim', 'Toby', 'Tom', 'Vera', 'Wendy', 'Zoe', 'Zac'];
 const places = ['Alton Towers', 'Disneyland', 'the Trafford Centre', 'Timperley village', 'London', 'Edinburgh', 'Chessington World of Adventures'];
 const smallThings = ['bouncy balls', 'sweets', 'marbles', 'pegs', 'socks', 'stickers'];
+const sports = ['football', 'cricket', 'tennis', 'rugby', 'cycling', 'netball', 'hockey', 'dodgeball', 'baseball'];
 const transports = ['bus', 'car', 'train', 'bike', 'motorbike', 'scooter', 'tram', 'coach', 'boat'];
 const objects = ['sofa', 'holiday', 'laptop', 'car', 'fridge', 'desk', 'washing machine']
   
