@@ -15,6 +15,7 @@ return(
       <Link href="/algebra" legacyBehavior><div className="subjectCard">Algebra</div></Link>
       <Link href="/fractions" legacyBehavior><div className="subjectCard">Fractions</div></Link>
       <Link href="/percentages" legacyBehavior><div className="subjectCard">Percentages</div></Link>
+      <Link href="/mmmr" legacyBehavior><div className="subjectCard">Mode, Median, Mean and Range</div></Link>
           </div>
          
          </div>

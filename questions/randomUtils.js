@@ -65,7 +65,8 @@ export const getVariables = (sentence) => {
             variablesObj[variable] = getRandomMainNumber();
         } else if (variable.includes("nextNoteUp")) {
             variablesObj[variable] = getNextNoteUp((100 - variablesObj.percentage) / 100 * variablesObj.mainNumber);
-        
+        } else if (variable.includes("placeholder")) {
+            variablesObj[variable] = 0;
         } else variablesObj[variable] = getRandomItem(variablesObj, removeNumbersFromString(variable));
     })
     
@@ -140,15 +141,34 @@ export const getRandomMainNumber = () => {
     return str.replace(/\d+/g, '');
   };
 
+  export const getValuesOfPropertiesWithNumber = (obj) => {
+    const valuesOfPropertiesWithNumber = [];
+  
+    for (const propertyName in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, propertyName)) {
+        if (typeof obj[propertyName] === 'number') {
+          valuesOfPropertiesWithNumber.push(obj[propertyName]);
+        }
+      }
+    }
+  
+    return valuesOfPropertiesWithNumber;
+  }
+
 
   export const getRandomItem = (variablesObj, itemType) => {
     //const itemArrayName = itemType + "s";
     // const itemArray = eval(itemArrayName); //this doesn't work on mobile or tablet
     let itemArray;
+    let mustBeUnique = true;
 
     switch(itemType) {
       case 'colour':
         itemArray = colours;
+        break;
+      case 'dartsNumber':
+        itemArray = dartsNumbers;
+        mustBeUnique = false;
         break;
       case 'food':
         itemArray = foods;
@@ -176,9 +196,14 @@ export const getRandomMainNumber = () => {
         break;
       
     }
+    console.log(itemArray);
+    console.log("length is " + itemArray.length);
     let selectedItem = itemArray[Math.floor(Math.random() * itemArray.length)];    
-    while (isStringFoundInObject(variablesObj, selectedItem)) {
-        selectedItem = itemArray[Math.floor(Math.random() * itemArray.length)]; 
+    
+    if (mustBeUnique) {
+      while (isStringFoundInObject(variablesObj, selectedItem)) {
+          selectedItem = itemArray[Math.floor(Math.random() * itemArray.length)]; 
+      }
     }
     return selectedItem;
 }
@@ -210,7 +235,24 @@ export const getNextNoteUp = (amount) => {
   }
 }
 
+function getPossibleDartsScores() {
+  const scores = new Set([25, 50]); // Using a Set to ensure uniqueness
+  const numbers = Array.from({ length: 20 }, (_, i) => i + 1); // Numbers 1 to 20
+
+  // Add single scores for each number (1 to 20)
+  scores.add(...numbers);
+
+  // Add double and triple scores for each number
+  numbers.forEach((number) => {
+    scores.add(number * 2); // Double
+    scores.add(number * 3); // Triple
+  });
+
+  return Array.from(scores); // Convert Set back to an array
+}
+
 const colours = ['blue', 'red', 'yellow' ,'green', 'orange', 'purple', 'pink'];
+const dartsNumbers = getPossibleDartsScores();
 const foods = ['cake', 'pizza', 'paella', 'pie', 'rhubarb crumble', 'lemon meringue pie'];
 const groups = ['friends', 'schoolchildren', 'elderly people', 'nuns', 'footballers', 'cricketers', 'teachers', 'doctors', 'hairdressers', 'software developers'];
 const names = ['Adam', 'Amelia', 'Anna', 'Ali', 'Ben', 'Bethany', 'Boris', 'Caleb', 'Charlotte', 'Chloe', 'Dan', 'Dev', 'Eesa', 'Emily', 'Ethan', 'Freya', 'Freddie', 'Gavin', 
