@@ -5,10 +5,13 @@ const MathsQuestion = ({question, answer, refreshQuestion}) => {
 
     const [isChecked, setIsChecked] = useState(false);
     const [isCorrect, setIsCorrect] = useState(false);
+    const [bgColour, setBgColour] = useState('');
 
+    const BACKGROUNDS = ["bgLightPink", "bgLightYellow", "bgLightBlue", "bgLightGreen"]
     useEffect(() => {
         setIsChecked(false);  
-        clearInput();          
+        clearInput();    
+        setBgColour(BACKGROUNDS[Math.floor(Math.random() * BACKGROUNDS.length)]);      
     }, [question])
 
     const clearInput = () => {
@@ -24,8 +27,11 @@ const MathsQuestion = ({question, answer, refreshQuestion}) => {
         }
     }
 
+    
+   
+
     return(
-        <div className="maths-question-container">
+        <div className={bgColour + " maths-question-container"}>
         <div className="maths-question">{question}</div>
        
         <label htmlFor="inpAnswer">Enter your answer:</label>

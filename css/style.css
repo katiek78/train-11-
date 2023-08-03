@@ -158,7 +158,7 @@
 
 .maths-question-container {
   width: 300px;
-  background-color: #ffb6c1;
+  /* background-color: #ffb6c1; */
   padding: 20px;
   border-radius: 16px
 }
@@ -630,6 +630,23 @@ li {
 
 .incorrect:hover {
   background-color: #a50505;
+}
+
+
+.bgLightPink {
+  background-color:#f1c2d4
+}
+
+.bgLightYellow {
+  background-color:#f6f7be
+}
+
+.bgLightBlue {
+  background-color:#cdccf8
+}
+
+.bgLightGreen {
+  background-color:#aae2c3
 }
 
 /* Media query for larger screens */
