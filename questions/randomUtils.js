@@ -37,7 +37,7 @@ export const extractTagNames = (str) => {
 
 
 export const getVariables = (sentence) => {
-    console.log(sentence);
+    
     //initialise the object
     const variablesObj = {}
 
@@ -50,21 +50,15 @@ export const getVariables = (sentence) => {
        
        
         if (variable.includes("fraction")) {
-             variablesObj[variable] = getRandomFraction();
-        // } else if (variable.includes("group")) {
-        //     variablesObj[variable] = getRandomGroup(variablesObj);
-        // } else if (variable.includes("place")) {
-        //     variablesObj[variable] = getRandomPlace(variablesObj);
-        // } else if (variable.includes("transport")) {
-        //     variablesObj[variable] = getRandomTransport(variablesObj);
-        // } else if (variable.includes("food")) {
-        //     variablesObj[variable] = getRandomFood();
+             variablesObj[variable] = getRandomFraction();     
         } else if (variable.includes("percentage")) {
             variablesObj[variable] = getRandomPercentage();
         } else if (variable.includes("mainNumber")) {
             variablesObj[variable] = getRandomMainNumber();
         } else if (variable.includes("nextNoteUp")) {
             variablesObj[variable] = getNextNoteUp((100 - variablesObj.percentage) / 100 * variablesObj.mainNumber);
+        } else if (variable.includes("measurement")) {
+          variablesObj[variable] = getRandomMeasurement();  
         } else if (variable.includes("placeholder")) {
             variablesObj[variable] = 0;
         } else variablesObj[variable] = getRandomItem(variablesObj, removeNumbersFromString(variable));
@@ -155,6 +149,22 @@ export const getRandomMainNumber = () => {
     return valuesOfPropertiesWithNumber;
   }
 
+  const getRandomMeasurement = () => {
+    let result;
+    do {
+      result = getRandomInteger(10) + "." + getRandomInteger(10, false);
+    } while (result === "0.0");
+    return result;
+    
+  }
+
+  const getRandomInteger = (max, zeroAllowed = true) => {
+    if (zeroAllowed) {
+      return Math.floor(Math.random() * max);
+    }
+    else return Math.floor(Math.random() * max - 1) + 1;
+  }
+
 
   export const getRandomItem = (variablesObj, itemType) => {
     console.log(itemType);
@@ -195,7 +205,14 @@ export const getRandomMainNumber = () => {
       case 'transport':
         itemArray = transports;
         break;
+      case 'longObject':
+        itemArray = longObjects;
       
+        break;
+      case 'lengthUnit':
+        itemArray = lengthUnits
+        mustBeUnique = false; //seems to cause a crash
+        break;
     }
     console.log(itemArray);
     console.log("length is " + itemArray.length);
@@ -264,3 +281,5 @@ const smallThings = ['bouncy balls', 'sweets', 'marbles', 'pegs', 'socks', 'stic
 const sports = ['football', 'cricket', 'tennis', 'rugby', 'cycling', 'netball', 'hockey', 'dodgeball', 'baseball'];
 const transports = ['bus', 'car', 'train', 'bike', 'motorbike', 'scooter', 'tram', 'coach', 'boat'];
 const objects = ['sofa', 'holiday', 'laptop', 'car', 'fridge', 'desk', 'washing machine']
+const longObjects = ['daisy chain', 'paper chain', 'scarf'];
+export const lengthUnits = ['mm', 'cm', 'm', 'km']
