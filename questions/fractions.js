@@ -80,6 +80,8 @@ const createSimpleFractionsQuestion = () => {
      break;
  }
 
+ if (answer.endsWith("/1")) answer = answer.slice(0, -2)
+
  return { question: question, answer: answer };
 }
   
@@ -87,7 +89,9 @@ const createSimpleFractionsQuestion = () => {
 const createWordFractionsQuestion = () => {    
     const sentences = [
         {sentence: '<name1> and <name2> cooked a <food>. <name1> ate <fraction1> of the <food> and <name2> ate <fraction2> of the <food>. What fraction of the <food> was left?', description: "whatIsLeft"},
-        {sentence: 'A group of <group> were going to <place>. <fraction1> of them went by <transport1> and <fraction2> of them went by <transport2>. The rest went by <transport3>. What fraction went by <transport3>?', description: "whatIsLeft"}
+        {sentence: 'A group of <group> were going to <place>. <fraction1> of them went by <transport1> and <fraction2> of them went by <transport2>. The rest went by <transport3>. What fraction went by <transport3>?', description: "whatIsLeft"},
+        {sentence: '<fraction> carriages on a train have been painted <colour>. There are total of <mainNumber> carriages. How many of the carriages are not painted <colour>?', description: "howManyAreNot"},
+        {sentence: '<fraction> carriages on a train have been painted <colour>. There are total of <mainNumber> carriages. How many of the carriages are painted <colour>?', description: "howManyAre"}
     ]
 
     const chosenSentenceIndex = Math.floor(Math.random() * sentences.length);
@@ -115,6 +119,27 @@ const createWordFractionsQuestion = () => {
             answer = simplifyFraction(numerator, denominator);
             console.log(variablesObj);
             break;
+    
+        case "howManyAreNot":
+          //replace if fraction is a half
+          while (variablesObj.fraction.denominator === 2 * variablesObj.fraction.numerator) {
+            variablesObj.fraction = getRandomFraction();
+          }
+          variablesObj.mainNumber = getSmallMultiple(variablesObj.fraction.denominator);
+          
+          answer = variablesObj.mainNumber - (variablesObj.mainNumber / variablesObj.fraction.denominator * variablesObj.fraction.numerator);
+          variablesObj.fraction = variablesObj.fraction.numerator + " in " + variablesObj.fraction.denominator;
+          break;
+        case "howManyAre":
+             //replace if fraction is a half
+             while (variablesObj.fraction.denominator === 2 * variablesObj.fraction.numerator) {
+              variablesObj.fraction = getRandomFraction();
+            }
+          variablesObj.mainNumber = getSmallMultiple(variablesObj.fraction.denominator);
+          console.log("main number is " + variablesObj.mainNumber);                    
+          answer = (variablesObj.fraction.numerator / variablesObj.fraction.denominator * variablesObj.mainNumber);
+          variablesObj.fraction = variablesObj.fraction.numerator + " in " + variablesObj.fraction.denominator;
+          break;
         default:
             answer = "";
     }
@@ -168,3 +193,7 @@ const convertToFraction = (value) => {
     return numerator + "/" + denominator;
   };
   
+const getSmallMultiple = (value) => {
+  const multiplicand = Math.floor(Math.random() * 8 + 1);
+  return multiplicand * value;
+}

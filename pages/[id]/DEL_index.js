@@ -61,13 +61,17 @@ const WordPage = ({ word }) => {
   )
 }
 
-export async function getServerSideProps({ params }) {
+export const getServerSideProps = withPageAuthRequired({
+  getServerSideProps: async ({ req, res }) => {
+  const auth0User = await getSession(req, res);
+  const user = (auth0User).user
   await dbConnect()
 
   const word = await Word.findById(params.id).lean()
   word._id = word._id.toString()
 
-  return { props: { word } }
+  return { props: { user, word } }
 }
+})
 
 export default WordPage

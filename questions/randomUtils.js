@@ -157,6 +157,7 @@ export const getRandomMainNumber = () => {
 
 
   export const getRandomItem = (variablesObj, itemType) => {
+    console.log(itemType);
     //const itemArrayName = itemType + "s";
     // const itemArray = eval(itemArrayName); //this doesn't work on mobile or tablet
     let itemArray;
@@ -263,4 +264,3 @@ const smallThings = ['bouncy balls', 'sweets', 'marbles', 'pegs', 'socks', 'stic
 const sports = ['football', 'cricket', 'tennis', 'rugby', 'cycling', 'netball', 'hockey', 'dodgeball', 'baseball'];
 const transports = ['bus', 'car', 'train', 'bike', 'motorbike', 'scooter', 'tram', 'coach', 'boat'];
 const objects = ['sofa', 'holiday', 'laptop', 'car', 'fridge', 'desk', 'washing machine']
-  

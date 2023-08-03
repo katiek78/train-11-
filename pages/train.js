@@ -185,6 +185,7 @@ const Train = ({ words }) => {
 
 
 
+
   return (
     <>
       <div className="grid wrapper">

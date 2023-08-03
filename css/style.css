@@ -111,7 +111,8 @@
 
 .subjectLinks {
   display:flex;
-  flex-direction: column;
+  align-items: center;
+  flex-direction: row;
 }
 
 .subjectCard {
@@ -651,6 +652,10 @@ li {
     margin-left: 10px;
     margin-bottom: 0;
     margin-right: 20px;
+  }
+
+  h1 {
+    text-align: center;
   }
 
   h5.word {

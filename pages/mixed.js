@@ -3,6 +3,7 @@ import { createFractionsQuestion } from '../questions/fractions';
 import { createPercentagesQuestion } from '../questions/percentages';
 import MathsQuestion from '../components/MathsQuestion';
 import { useState, useEffect } from "react"
+import { createMMMRQuestion } from '../questions/mmmr';
 
 const Mixed = () => {
 
@@ -17,7 +18,7 @@ const Mixed = () => {
 
     },[needNewQuestion])
 
-    const questionTypes = ['fractions', 'algebra'];
+    const questionTypes = ['fractions', 'algebra', 'percentages', 'mmmr'];
     const createRandomQuestion = () => {
         const chosenTypeIndex = Math.floor(Math.random() * questionTypes.length);
         const chosenType = questionTypes[chosenTypeIndex];
@@ -39,6 +40,9 @@ const Mixed = () => {
             case 'percentages':
                 return createPercentagesQuestion();
                 break;
+            case 'mmmr':
+                return createMMMRQuestion();
+                break;
             default:
                 throw new Error("Invalid question type selected");
         }
@@ -54,7 +58,7 @@ const Mixed = () => {
             <div className="maths-question-page">
         <h1>Mixed Practice</h1>
         <MathsQuestion question={question.question} answer={question.answer} refreshQuestion={refreshQuestion} />
-        
+        {question.supportingInfo && question.supportingInfo}      
         </div>
         </div>
     )
