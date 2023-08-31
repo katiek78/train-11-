@@ -53,6 +53,8 @@ export const getVariables = (sentence) => {
              variablesObj[variable] = getRandomFraction();     
         } else if (variable.includes("percentage")) {
             variablesObj[variable] = getRandomPercentage();
+        } else if (variable.includes("decimal")) {
+            variablesObj[variable] = getRandomDecimal();
         } else if (variable.includes("mainNumber")) {
             variablesObj[variable] = getRandomMainNumber();
         } else if (variable.includes("nextNoteUp")) {
@@ -84,6 +86,14 @@ export const getRandomPercentage = (min = 0, max = 100) => {
 
     return roundedAndAdjusted;
 };
+
+export const getRandomDecimal = () => {
+  const randomDecimal = Math.random(); // Generates a random number between 0 (inclusive) and 1 (exclusive)
+  const roundedNum = Math.round(randomDecimal * 100) / 100; // Rounds the number to 2 decimal places
+  return roundedNum;
+}
+
+ 
 
 export const getRandomMainNumber = () => {
   

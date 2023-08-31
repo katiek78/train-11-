@@ -2,7 +2,7 @@ import dbConnect from '../lib/dbConnect'
 import Word from '../models/Word'
 import RandomWord from '../components/RandomWord';
 
-import { getConfidenceLevel } from '../utilities/confidenceLevel';
+import { getConfidenceLevel, confidenceColours, confidenceLabels } from '../utilities/confidenceLevel';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { mutate } from 'swr'
@@ -27,7 +27,7 @@ const Train = ({ words }) => {
 
       if (cardSet === 'all') {
         setFilteredData(words);
-      } else setFilteredData(words.filter(word => getConfidenceLevel(word.recentAttempts) === cardSet));
+      } else setFilteredData(words.filter(word => getConfidenceLevel(word.recentAttempts) === parseInt(cardSet)));
     }
 
     filterData();
@@ -41,6 +41,17 @@ const Train = ({ words }) => {
   }, [needNewWord]);
 
 
+  const getGroupTotals = () => {
+     //console.log("getting group totals - this means page has refreshed") //this happens when you change select, when you click Start, when you click submit, when you press correct
+     let result = [];
+     for (let i = 0; i < confidenceLabels.length; i++) {
+       const group = words.filter(word => getConfidenceLevel(word.recentAttempts) === parseInt(i))
+       result.push(group.length);
+     }
+     return result;
+   }
+ 
+   const groupTotals = getGroupTotals();
 
   const handleNext = () => {
     setNeedNewWord(true);
@@ -48,7 +59,7 @@ const Train = ({ words }) => {
 
   const handleChangeSelect = () => {
     const level = document.getElementById("selSet").value;
-    //console.log(words.filter(word => getConfidenceLevel(word.timesCorrect, word.timesTested) === level))
+    console.log(level)
     setCardSet(level);
     setNeedNewWord(true);
   }
@@ -195,14 +206,17 @@ const Train = ({ words }) => {
             <p>Which words do you want to train?</p>
 
             <select id="selSet" onChange={handleChangeSelect}>
-              <option value="all">All 🌍</option>
-              <option value="untested">Untested ❓</option>
+              <option value="all">All 🌍 </option>
+              {/* <option value="untested">Untested ❓</option>
               <option value="very-low">Very tricky 🤯</option>
               <option value="low">Tricky 😓</option>
               <option value="medium-low">A little tricky 🙁</option>
               <option value="medium">Medium 😑</option>
               <option value="medium-high">Fairly easy 🙂</option>
               <option value="high">Easy 😊</option>
+               */}
+               
+      {confidenceLabels.map((label, i) => <option value={i}>{label} ({groupTotals && groupTotals[i]})</option>)}  
             </select>
 
           </div>

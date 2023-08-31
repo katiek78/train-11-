@@ -482,27 +482,27 @@ h6.word-view {
   background-color: red;
 }
 
-.confidence-level.confidence-low {
+.confidence-level.confidence-2 {
   background-color: orangered;
 }
 
-.confidence-level.confidence-medium-low {
+.confidence-level.confidence-3 {
   background-color: rgb(223, 142, 21);
 }
 
-.confidence-level.confidence-medium {
+.confidence-level.confidence-4 {
   background-color: yellow;
 }
 
-.confidence-level.confidence-medium-high {
+.confidence-level.confidence-5 {
   background-color: rgb(153, 235, 76);
 }
 
-.confidence-level.confidence-high {
+.confidence-level.confidence-6 {
   background-color: lime;
 }
 
-.confidence-level.confidence-untested {
+.confidence-level.confidence-0 {
   background-color: grey;
 }
 
